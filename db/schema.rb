@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100730160653) do
+ActiveRecord::Schema.define(:version => 20100729164538) do
 
   create_table "academic_credentials", :force => true do |t|
     t.integer  "student_id"
@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(:version => 20100730160653) do
 
   create_table "achievements", :force => true do |t|
     t.integer  "person_id"
+    t.string   "kind"
     t.string   "title"
     t.string   "authors"
     t.string   "outlet"
     t.integer  "year"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "kind"
   end
 
   create_table "advisorships", :force => true do |t|
@@ -74,15 +74,6 @@ ActiveRecord::Schema.define(:version => 20100730160653) do
     t.string   "year"
     t.string   "vtel"
     t.boolean  "offered"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "classes", :force => true do |t|
-    t.integer  "course_id"
-    t.string   "semester"
-    t.string   "year"
-    t.string   "vtel"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -118,8 +109,6 @@ ActiveRecord::Schema.define(:version => 20100730160653) do
     t.string   "middle_names"
     t.string   "last_name"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "address_1"
     t.string   "address_2"
     t.string   "city"
@@ -127,14 +116,16 @@ ActiveRecord::Schema.define(:version => 20100730160653) do
     t.string   "postal_code"
     t.string   "university"
     t.string   "department"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "phones", :force => true do |t|
+    t.integer  "owner_id"
+    t.integer  "owner_type"
     t.string   "number"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "owner_id"
-    t.string   "owner_type"
   end
 
   create_table "registered_classes", :force => true do |t|
@@ -145,7 +136,16 @@ ActiveRecord::Schema.define(:version => 20100730160653) do
     t.datetime "updated_at"
   end
 
+  create_table "registered_courses", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "course_schedule_id"
+    t.string   "grade"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "us_residencies", :force => true do |t|
+    t.integer  "person_id"
     t.date     "date_started"
     t.date     "date_ended"
     t.string   "address_1"
@@ -155,7 +155,6 @@ ActiveRecord::Schema.define(:version => 20100730160653) do
     t.string   "zipcode"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "person_id"
   end
 
   create_table "vt_infos", :force => true do |t|

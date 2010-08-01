@@ -2,7 +2,7 @@ class CreateAchievements < ActiveRecord::Migration
   def self.up
     create_table :achievements do |t|
       t.integer :person_id
-      t.string :type
+      t.string :kind
       t.string :title
       t.string :authors
       t.string :outlet

@@ -5,6 +5,7 @@ class ClassSchedule < ActiveRecord::Base
 	has_many :students, :through => :registered_classes
 
 	def to_label
-		"#{semester} #{year}: #{course.to_label}"
+		#"#{semester} #{year}: #{course.to_label}"
+		2
 	end
 end

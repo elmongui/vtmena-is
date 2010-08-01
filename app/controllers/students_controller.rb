@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   active_scaffold :student do |config|
-    config.columns = [:type, :first_name, :last_name, :email, :address_1, :address_2, :city, :governorate, :postal_code, :phones]
+    config.columns = [:type, :first_name, :middle_names, :last_name, :email, :address_1, :address_2, :city, :governorate, :postal_code, :phones]
     list.columns.exclude :type, :middle_names, :address_1, :address_2, :city, :governorate, :postal_code, :us_residency, :phones
     create.columns.exclude :type
 	show.columns.exclude :type

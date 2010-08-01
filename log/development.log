@@ -22207,3 +22207,2225 @@ Rendered _nested (343.0ms)
 Rendered _messages (16.0ms)
 Rendered _list_inline_adapter (16.0ms)
 Completed in 375ms (View: 16, DB: 0) | 200 OK [http://localhost/students/6/nested?_method=get&associations=vtmena_academic_progress&adapter=_list_inline_adapter]
+ActiveScaffold: extending RESTful routes for advisorships
+ActiveScaffold: extending RESTful routes for achievements
+ActiveScaffold: extending RESTful routes for vtmena_academic_progresses
+ActiveScaffold: extending RESTful routes for registered_classes
+ActiveScaffold: extending RESTful routes for instructors
+ActiveScaffold: extending RESTful routes for class_schedules
+ActiveScaffold: extending RESTful routes for courses
+ActiveScaffold: extending RESTful routes for academic_milestones
+ActiveScaffold: extending RESTful routes for au_infos
+ActiveScaffold: extending RESTful routes for vt_infos
+ActiveScaffold: extending RESTful routes for employments
+ActiveScaffold: extending RESTful routes for academic_credentials
+ActiveScaffold: extending RESTful routes for us_residencies
+ActiveScaffold: extending RESTful routes for phones
+ActiveScaffold: extending RESTful routes for students
+ActiveScaffold: extending RESTful routes for professors
+ActiveScaffold: extending RESTful routes for people
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreatePeople (20100725200540)
+  [4;36;1mSQL (171.0ms)[0m   [0;1mCREATE TABLE `people` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `type` varchar(255), `first_name` varchar(255), `middle_names` varchar(255), `last_name` varchar(255), `email` varchar(255), `address_1` varchar(255), `address_2` varchar(255), `city` varchar(255), `governorate` varchar(255), `postal_code` varchar(255), `university` varchar(255), `department` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (16.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100725200540')[0m
+Migrating to CreatePhones (20100725200901)
+  [4;36;1mSQL (78.0ms)[0m   [0;1mCREATE TABLE `phones` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `owner_id` int(11), `owner_type` int(11), `number` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (15.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100725200901')[0m
+Migrating to CreateUsResidencies (20100726095454)
+  [4;36;1mSQL (78.0ms)[0m   [0;1mCREATE TABLE `us_residencies` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `person_id` int(11), `date_started` date, `date_ended` date, `address_1` varchar(255), `address_2` varchar(255), `city` varchar(255), `state` varchar(255), `zipcode` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (15.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100726095454')[0m
+Migrating to CreateAcademicCredentials (20100726161701)
+  [4;36;1mSQL (78.0ms)[0m   [0;1mCREATE TABLE `academic_credentials` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `student_id` int(11), `b_sc_university` varchar(255), `b_sc_area` varchar(255), `b_sc_year` int(11), `b_sc_gpa` decimal(3,2), `m_sc_university` varchar(255), `m_sc_area` varchar(255), `m_sc_year` int(11), `m_sc_gpa` decimal(3,2), `gre_v` int(11), `gre_q` int(11), `gre_a` decimal(2,1), `toefl` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (32.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100726161701')[0m
+Migrating to CreateEmployments (20100726163813)
+  [4;36;1mSQL (78.0ms)[0m   [0;1mCREATE TABLE `employments` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `student_id` int(11), `present_employer` varchar(255), `position` varchar(255), `government` tinyint(1), `mission` tinyint(1), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (31.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100726163813')[0m
+Migrating to CreateVtInfos (20100726164550)
+  [4;36;1mSQL (62.0ms)[0m   [0;1mCREATE TABLE `vt_infos` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `student_id` int(11), `student_pid` varchar(255), `student_id_number` varchar(255), `department` varchar(255), `degree` varchar(255), `degree_program` varchar(255), `area` varchar(255), `semester_admitted` varchar(255), `year` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (15.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100726164550')[0m
+Migrating to CreateAuInfos (20100726164937)
+  [4;36;1mSQL (78.0ms)[0m   [0;1mCREATE TABLE `au_infos` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `student_id` int(11), `department` varchar(255), `degree` varchar(255), `degree_program` varchar(255), `area` varchar(255), `semester_admitted` varchar(255), `year` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (16.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100726164937')[0m
+Migrating to CreateAcademicMilestones (20100726175235)
+  [4;36;1mSQL (78.0ms)[0m   [0;1mCREATE TABLE `academic_milestones` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `student_id` int(11), `name` varchar(255), `status` varchar(255), `date` date, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (16.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100726175235')[0m
+Migrating to CreateCourses (20100726181845)
+  [4;36;1mSQL (78.0ms)[0m   [0;1mCREATE TABLE `courses` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `number` varchar(255), `topic` varchar(255), `university` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (47.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100726181845')[0m
+Migrating to CreateClassSchedules (20100726194247)
+  [4;36;1mSQL (125.0ms)[0m   [0;1mCREATE TABLE `class_schedules` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `course_id` int(11), `semester` varchar(255), `year` varchar(255), `vtel` varchar(255), `offered` tinyint(1), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (16.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100726194247')[0m
+Migrating to CreateInstructors (20100726194322)
+  [4;36;1mSQL (78.0ms)[0m   [0;1mCREATE TABLE `instructors` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `professor_id` int(11), `class_schedule_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (31.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100726194322')[0m
+Migrating to CreateRegisteredCourses (20100726212105)
+  [4;36;1mSQL (94.0ms)[0m   [0;1mCREATE TABLE `registered_courses` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `student_id` int(11), `course_schedule_id` int(11), `grade` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (15.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100726212105')[0m
+Migrating to CreateRegisteredClasses (20100726214207)
+  [4;36;1mSQL (94.0ms)[0m   [0;1mCREATE TABLE `registered_classes` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `student_id` int(11), `class_schedule_id` int(11), `grade` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (16.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100726214207')[0m
+Migrating to CreateVtmenaAcademicProgresses (20100726221759)
+  [4;36;1mSQL (93.0ms)[0m   [0;1mCREATE TABLE `vtmena_academic_progresses` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `student_id` int(11), `research_topic` varchar(255), `vt_gpa` decimal(3,2), `vt_course_credits` int(11), `vt_research_credits` int(11), `au_gpa` decimal(3,2), `au_course_credits` int(11), `au_research_credits` int(11), `total_course_credits` int(11), `total_research_credits` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (16.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100726221759')[0m
+Migrating to CreateAchievements (20100728160105)
+  [4;36;1mSQL (78.0ms)[0m   [0;1mCREATE TABLE `achievements` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `person_id` int(11), `kind` varchar(255), `title` varchar(255), `authors` varchar(255), `outlet` varchar(255), `year` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (15.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100728160105')[0m
+Migrating to CreateAdvisorships (20100729164538)
+  [4;36;1mSQL (78.0ms)[0m   [0;1mCREATE TABLE `advisorships` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `student_id` int(11), `professor_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (16.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100729164538')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mSQL (172.0ms)[0m   [0;1mdescribe `academic_credentials`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW KEYS FROM `academic_credentials`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_milestones`[0m
+  [4;35;1mSQL (172.0ms)[0m   [0mdescribe `academic_milestones`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW KEYS FROM `academic_milestones`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW FIELDS FROM `achievements`[0m
+  [4;36;1mSQL (187.0ms)[0m   [0;1mdescribe `achievements`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW KEYS FROM `achievements`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW FIELDS FROM `advisorships`[0m
+  [4;35;1mSQL (172.0ms)[0m   [0mdescribe `advisorships`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW KEYS FROM `advisorships`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mSQL (187.0ms)[0m   [0;1mdescribe `au_infos`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW KEYS FROM `au_infos`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW FIELDS FROM `class_schedules`[0m
+  [4;35;1mSQL (172.0ms)[0m   [0mdescribe `class_schedules`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW KEYS FROM `class_schedules`[0m
+  [4;35;1mSQL (15.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+  [4;36;1mSQL (172.0ms)[0m   [0;1mdescribe `courses`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW KEYS FROM `courses`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mdescribe `employments`[0m
+  [4;36;1mSQL (15.0ms)[0m   [0;1mSHOW KEYS FROM `employments`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW FIELDS FROM `instructors`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mdescribe `instructors`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW KEYS FROM `instructors`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mSQL (188.0ms)[0m   [0mdescribe `people`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW KEYS FROM `people`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW FIELDS FROM `phones`[0m
+  [4;36;1mSQL (171.0ms)[0m   [0;1mdescribe `phones`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW KEYS FROM `phones`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW FIELDS FROM `registered_classes`[0m
+  [4;35;1mSQL (16.0ms)[0m   [0mdescribe `registered_classes`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW KEYS FROM `registered_classes`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW FIELDS FROM `registered_courses`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mdescribe `registered_courses`[0m
+  [4;35;1mSQL (15.0ms)[0m   [0mSHOW KEYS FROM `registered_courses`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mSQL (172.0ms)[0m   [0mdescribe `us_residencies`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW KEYS FROM `us_residencies`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mSQL (187.0ms)[0m   [0;1mdescribe `vt_infos`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW KEYS FROM `vt_infos`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+  [4;35;1mSQL (172.0ms)[0m   [0mdescribe `vtmena_academic_progresses`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW KEYS FROM `vtmena_academic_progresses`[0m
+ActiveScaffold: extending RESTful routes for advisorships
+ActiveScaffold: extending RESTful routes for achievements
+ActiveScaffold: extending RESTful routes for vtmena_academic_progresses
+ActiveScaffold: extending RESTful routes for registered_classes
+ActiveScaffold: extending RESTful routes for instructors
+ActiveScaffold: extending RESTful routes for class_schedules
+ActiveScaffold: extending RESTful routes for courses
+ActiveScaffold: extending RESTful routes for academic_milestones
+ActiveScaffold: extending RESTful routes for au_infos
+ActiveScaffold: extending RESTful routes for vt_infos
+ActiveScaffold: extending RESTful routes for employments
+ActiveScaffold: extending RESTful routes for academic_credentials
+ActiveScaffold: extending RESTful routes for us_residencies
+ActiveScaffold: extending RESTful routes for phones
+ActiveScaffold: extending RESTful routes for students
+ActiveScaffold: extending RESTful routes for professors
+ActiveScaffold: extending RESTful routes for people
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (15.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#index (for 127.0.0.1 at 2010-08-01 16:53:16) [GET]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `people` WHERE ( (`people`.`type` = 'Student' ) ) [0m
+  [4;35;1mStudent Load (0.0ms)[0m   [0mSELECT `people`.* FROM `people` WHERE ( (`people`.`type` = 'Student' ) ) ORDER BY `people`.`first_name` ASC, `people`.`last_name` ASC LIMIT 0, 15[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT `people`.* FROM `people` WHERE ( (`people`.`type` = 'Student' ) ) ORDER BY `people`.`first_name` ASC, `people`.`last_name` ASC LIMIT 0, 15[0m
+Rendering template within layouts/application
+Rendering list
+Rendered _list_header (16.0ms)
+Rendered _list_column_headings (93.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (16.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (109.0ms)
+Completed in 484ms (View: 156, DB: 46) | 200 OK [http://localhost/students]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mStudent Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAcademicCredential Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mAuInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mVtInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#new (for 127.0.0.1 at 2010-08-01 16:53:21) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter"}
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (15.0ms)
+  [4;35;1mPhone Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `phones`[0m
+Rendered _horizontal_subform_header (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `phones` WHERE ((owner_id IS NULL)) [0m
+Rendered _form_association_footer (16.0ms)
+Rendered _horizontal_subform (32.0ms)
+Rendered _form_association (125.0ms)
+Rendered _form (188.0ms)
+Rendered _create_form (203.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (15.0ms)
+Completed in 234ms (View: 15, DB: 0) | 200 OK [http://localhost/students/new?_method=get&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mStudent Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAcademicCredential Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mAuInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mVtInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#index (for 127.0.0.1 at 2010-08-01 16:54:33) [GET]
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `people` WHERE ( (`people`.`type` = 'Student' ) ) [0m
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT `people`.* FROM `people` WHERE ( (`people`.`type` = 'Student' ) ) ORDER BY `people`.`first_name` ASC, `people`.`last_name` ASC LIMIT 0, 15[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT `people`.* FROM `people` WHERE ( (`people`.`type` = 'Student' ) ) ORDER BY `people`.`first_name` ASC, `people`.`last_name` ASC LIMIT 0, 15[0m
+Rendering template within layouts/application
+Rendering list
+Rendered _list_header (16.0ms)
+Rendered _list_column_headings (16.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (0.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (109.0ms)
+Completed in 140ms (View: 140, DB: 16) | 200 OK [http://localhost/students]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#new (for 127.0.0.1 at 2010-08-01 16:54:37) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter"}
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+  [4;36;1mPhone Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `phones`[0m
+Rendered _horizontal_subform_header (15.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `phones` WHERE ((owner_id IS NULL)) [0m
+Rendered _form_association_footer (0.0ms)
+Rendered _horizontal_subform (109.0ms)
+Rendered _form_association (125.0ms)
+Rendered _form (172.0ms)
+Rendered _create_form (281.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 297ms (View: 0, DB: 0) | 200 OK [http://localhost/students/new?_method=get&adapter=_list_inline_adapter]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (31.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#edit_associated (for 127.0.0.1 at 2010-08-01 16:55:23) [GET]
+  Parameters: {"association"=>"phones"}
+  [4;36;1mPhone Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `phones`[0m
+Rendering edit_associated
+Rendered _form_attribute (16.0ms)
+Rendered _horizontal_subform_record (16.0ms)
+Completed in 125ms (View: 125, DB: 31) | 200 OK [http://localhost/students/edit_associated?association=phones]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mStudent Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAcademicCredential Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mAuInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mVtInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#create (for 127.0.0.1 at 2010-08-01 16:55:31) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "record"=>{"city"=>"Alexandria", "postal_code"=>"21311", "middle_names"=>"Galal Mohamed", "governorate"=>"Alexandria", "address_1"=>"19 Dr Morisson St", "address_2"=>"Roushdy", "first_name"=>"Hicham", "phones"=>{"1280696123500"=>{"number"=>"0109269340"}, "1280696077511"=>{"number"=>"035444458"}}, "last_name"=>"Elmongui", "email"=>"elmongui@mena.vt.edu"}}
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPhone Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `phones`[0m
+  [4;35;1mStudent Create (0.0ms)[0m   [0mINSERT INTO `people` (`city`, `department`, `middle_names`, `postal_code`, `updated_at`, `university`, `type`, `address_1`, `governorate`, `address_2`, `first_name`, `last_name`, `email`, `created_at`) VALUES('Alexandria', NULL, 'Galal Mohamed', '21311', '2010-08-01 20:55:31', NULL, 'Student', '19 Dr Morisson St', 'Alexandria', 'Roushdy', 'Hicham', 'Elmongui', 'elmongui@mena.vt.edu', '2010-08-01 20:55:31')[0m
+  [4;36;1mPhone Create (0.0ms)[0m   [0;1mINSERT INTO `phones` (`updated_at`, `number`, `owner_id`, `owner_type`, `created_at`) VALUES('2010-08-01 20:55:31', '035444458', 1, 0, '2010-08-01 20:55:31')[0m
+  [4;35;1mPhone Create (0.0ms)[0m   [0mINSERT INTO `phones` (`updated_at`, `number`, `owner_id`, `owner_type`, `created_at`) VALUES('2010-08-01 20:55:31', '0109269340', 1, 0, '2010-08-01 20:55:31')[0m
+  [4;36;1mSQL (47.0ms)[0m   [0;1mCOMMIT[0m
+Rendering on_create
+Rendered _list_record_columns (0.0ms)
+Rendered _list_actions (16.0ms)
+Rendered _list_record (32.0ms)
+Rendered _messages (0.0ms)
+Completed in 218ms (View: 140, DB: 47) | 200 OK [http://localhost/students]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mStudent Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAcademicCredential Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mAuInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mVtInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#show (for 127.0.0.1 at 2010-08-01 16:55:41) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"1"}
+  [4;35;1mStudent Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+  [4;36;1mPhone Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `phones`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `phones` WHERE (`phones`.owner_id = 1 AND `phones`.owner_type = 'Person') [0m
+  [4;36;1mPhone Load (0.0ms)[0m   [0;1mSELECT * FROM `phones` WHERE (`phones`.owner_id = 1 AND `phones`.owner_type = 'Person') LIMIT 4[0m
+Rendered _show_columns (16.0ms)
+Rendered _show (16.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 46ms (View: 15, DB: 0) | 200 OK [http://localhost/students/1?_method=get&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mStudent Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAcademicCredential Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mAuInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mVtInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#row (for 127.0.0.1 at 2010-08-01 16:55:46) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mStudent Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Rendered _list_record_columns (0.0ms)
+Rendered _list_actions (0.0ms)
+Rendered _list_record (15.0ms)
+Completed in 47ms (View: 47, DB: 0) | 200 OK [http://localhost/students/1/row?_method=get]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mStudent Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#nested (for 127.0.0.1 at 2010-08-01 16:55:56) [GET]
+  Parameters: {"associations"=>"us_residency", "adapter"=>"_list_inline_adapter", "id"=>"1"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Start rendering component ({:action=>"index", :params=>{:parent_column=>"us_residency", :format=>"html", :eid=>"ef5147ad5e2dd9d4cc3d5141ee7a9aa6", :parent_model=>"Person", :nested=>true}, :controller=>"us_residencies"}): 
+
+
+Processing UsResidenciesController#index to html (for 127.0.0.1 at 2010-08-01 16:55:56) [GET]
+  Parameters: {"parent_column"=>"us_residency", "eid"=>"ef5147ad5e2dd9d4cc3d5141ee7a9aa6", "nested"=>true, "id"=>nil, "parent_model"=>"Person"}
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(DISTINCT `us_residencies`.id) AS count_all FROM `us_residencies` LEFT OUTER JOIN `phones` ON `phones`.owner_id = `us_residencies`.id AND `phones`.owner_type = 'UsResidency' LEFT OUTER JOIN `people` ON `people`.id = `us_residencies`.person_id WHERE (((us_residencies.person_id = '1'))) [0m
+  [4;36;1mUsResidency Load (0.0ms)[0m   [0;1mSELECT `us_residencies`.* FROM `us_residencies` WHERE (((us_residencies.person_id = '1'))) ORDER BY `us_residencies`.`id` ASC LIMIT 0, 15[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT `us_residencies`.* FROM `us_residencies` WHERE (((us_residencies.person_id = '1'))) ORDER BY `us_residencies`.`id` ASC LIMIT 0, 15[0m
+Rendering list
+Rendered _list_header (0.0ms)
+Rendered _list_column_headings (15.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (93.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (124.0ms)
+Completed in 171ms (View: 156, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=us_residency&adapter=_list_inline_adapter]
+
+
+End of component rendering
+Rendered _nested (187.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 218ms (View: 16, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=us_residency&adapter=_list_inline_adapter]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mUsResidency Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing UsResidenciesController#new (for 127.0.0.1 at 2010-08-01 16:55:59) [GET]
+  Parameters: {"eid"=>"ef5147ad5e2dd9d4cc3d5141ee7a9aa6", "parent_column"=>"us_residency", "nested"=>"true", "adapter"=>"_list_inline_adapter", "parent_model"=>"Person"}
+  [4;36;1mPerson Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mStudent Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+Rendered _form_attribute (16.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (16.0ms)
+Rendered _form_attribute (0.0ms)
+  [4;36;1mPhone Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `phones`[0m
+Rendered _horizontal_subform_header (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (15.0ms)
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `phones` WHERE ((owner_id IS NULL)) [0m
+Rendered _form_association_footer (0.0ms)
+Rendered _horizontal_subform (109.0ms)
+Rendered _form_association (109.0ms)
+Rendered _form (156.0ms)
+Rendered _create_form (187.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 296ms (View: 0, DB: 0) | 200 OK [http://localhost/us_residencies/new?_method=get&eid=ef5147ad5e2dd9d4cc3d5141ee7a9aa6&nested=true&parent_column=us_residency&parent_model=Person&adapter=_list_inline_adapter]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing UsResidenciesController#edit_associated (for 127.0.0.1 at 2010-08-01 16:56:22) [GET]
+  Parameters: {"eid"=>"ef5147ad5e2dd9d4cc3d5141ee7a9aa6", "association"=>"phones"}
+  [4;36;1mPhone Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `phones`[0m
+Rendering edit_associated
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (15.0ms)
+Completed in 125ms (View: 125, DB: 0) | 200 OK [http://localhost/us_residencies/edit_associated?association=phones&eid=ef5147ad5e2dd9d4cc3d5141ee7a9aa6]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mUsResidency Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+
+
+Processing UsResidenciesController#create (for 127.0.0.1 at 2010-08-01 16:56:28) [POST]
+  Parameters: {"eid"=>"ef5147ad5e2dd9d4cc3d5141ee7a9aa6", "parent_column"=>"us_residency", "nested"=>"true", "commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "parent_model"=>"Person", "record"=>{"city"=>"oijo", "zipcode"=>"oij", "date_started(1i)"=>"2006", "date_started(2i)"=>"5", "date_started(3i)"=>"", "address_1"=>"iouyhioujh", "address_2"=>"ojioij", "date_ended(1i)"=>"2010", "date_ended(2i)"=>"11", "phones"=>{"1280696159630"=>{"number"=>"78676758765"}, "1280696182421"=>{"number"=>"987987"}}, "date_ended(3i)"=>"", "state"=>"ijo"}}
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPhone Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `phones`[0m
+  [4;35;1mPerson Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mUsResidency Load (0.0ms)[0m   [0mSELECT * FROM `us_residencies` WHERE (`us_residencies`.person_id = 1) LIMIT 1[0m
+  [4;36;1mUsResidency Create (0.0ms)[0m   [0;1mINSERT INTO `us_residencies` (`city`, `updated_at`, `date_ended`, `zipcode`, `date_started`, `address_1`, `address_2`, `person_id`, `state`, `created_at`) VALUES('oijo', '2010-08-01 20:56:28', '2010-11-01', 'oij', '2006-05-01', 'iouyhioujh', 'ojioij', 1, 'ijo', '2010-08-01 20:56:28')[0m
+  [4;35;1mPhone Create (0.0ms)[0m   [0mINSERT INTO `phones` (`updated_at`, `number`, `owner_id`, `owner_type`, `created_at`) VALUES('2010-08-01 20:56:28', '78676758765', 1, 0, '2010-08-01 20:56:28')[0m
+  [4;36;1mPhone Create (0.0ms)[0m   [0;1mINSERT INTO `phones` (`updated_at`, `number`, `owner_id`, `owner_type`, `created_at`) VALUES('2010-08-01 20:56:28', '987987', 1, 0, '2010-08-01 20:56:28')[0m
+  [4;35;1mSQL (31.0ms)[0m   [0mCOMMIT[0m
+Rendering on_create
+Rendered _list_record_columns (16.0ms)
+Rendered _list_actions (0.0ms)
+Rendered _list_record (31.0ms)
+Rendered _messages (0.0ms)
+Completed in 203ms (View: 47, DB: 47) | 200 OK [http://localhost/us_residencies?eid=ef5147ad5e2dd9d4cc3d5141ee7a9aa6&nested=true&parent_column=us_residency&parent_model=Person]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#nested (for 127.0.0.1 at 2010-08-01 16:56:39) [GET]
+  Parameters: {"associations"=>"academic_credential", "adapter"=>"_list_inline_adapter", "id"=>"1"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Start rendering component ({:action=>"index", :params=>{:parent_column=>"academic_credential", :format=>"html", :eid=>"199212e5c3b5be1807ea92207beafd08", :parent_model=>"Student", :nested=>true}, :controller=>"academic_credentials"}): 
+
+
+Processing AcademicCredentialsController#index to html (for 127.0.0.1 at 2010-08-01 16:56:39) [GET]
+  Parameters: {"parent_column"=>"academic_credential", "eid"=>"199212e5c3b5be1807ea92207beafd08", "nested"=>true, "id"=>nil, "parent_model"=>"Student"}
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(DISTINCT `academic_credentials`.id) AS count_all FROM `academic_credentials` LEFT OUTER JOIN `people` ON `people`.id = `academic_credentials`.student_id AND (`people`.`type` = 'Student' ) WHERE (((academic_credentials.student_id = '1'))) [0m
+  [4;36;1mAcademicCredential Load (0.0ms)[0m   [0;1mSELECT `academic_credentials`.* FROM `academic_credentials` WHERE (((academic_credentials.student_id = '1'))) ORDER BY `academic_credentials`.`id` ASC LIMIT 0, 15[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT `academic_credentials`.* FROM `academic_credentials` WHERE (((academic_credentials.student_id = '1'))) ORDER BY `academic_credentials`.`id` ASC LIMIT 0, 15[0m
+Rendering list
+Rendered _list_header (15.0ms)
+Rendered _list_column_headings (31.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (16.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (141.0ms)
+Completed in 172ms (View: 172, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=academic_credential&adapter=_list_inline_adapter]
+
+
+End of component rendering
+Rendered _nested (188.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 218ms (View: 15, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=academic_credential&adapter=_list_inline_adapter]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mAcademicCredential Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mStudent Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAuInfo Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing AcademicCredentialsController#new (for 127.0.0.1 at 2010-08-01 16:56:45) [GET]
+  Parameters: {"eid"=>"199212e5c3b5be1807ea92207beafd08", "parent_column"=>"academic_credential", "nested"=>"true", "adapter"=>"_list_inline_adapter", "parent_model"=>"Student"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form (31.0ms)
+Rendered _create_form (63.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (15.0ms)
+Completed in 156ms (View: 93, DB: 0) | 200 OK [http://localhost/academic_credentials/new?_method=get&eid=199212e5c3b5be1807ea92207beafd08&nested=true&parent_column=academic_credential&parent_model=Student&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAuInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mVtInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing AcademicCredentialsController#create (for 127.0.0.1 at 2010-08-01 16:56:53) [POST]
+  Parameters: {"eid"=>"199212e5c3b5be1807ea92207beafd08", "parent_column"=>"academic_credential", "nested"=>"true", "commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "parent_model"=>"Student", "record"=>{"m_sc_university"=>"", "gre_q"=>"0", "b_sc_university"=>"", "toefl"=>"", "gre_a"=>"", "gre_v"=>"9", "m_sc_year"=>"7", "b_sc_year"=>"", "m_sc_gpa"=>"8", "b_sc_area"=>"", "m_sc_area"=>"6", "b_sc_gpa"=>""}}
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+  [4;35;1mAcademicCredential Load (0.0ms)[0m   [0mSELECT * FROM `academic_credentials` WHERE (`academic_credentials`.student_id = 1) LIMIT 1[0m
+  [4;36;1mAcademicCredential Create (0.0ms)[0m   [0;1mINSERT INTO `academic_credentials` (`m_sc_university`, `gre_q`, `updated_at`, `student_id`, `b_sc_university`, `toefl`, `gre_v`, `gre_a`, `b_sc_year`, `m_sc_year`, `b_sc_area`, `m_sc_gpa`, `b_sc_gpa`, `m_sc_area`, `created_at`) VALUES(NULL, 0, '2010-08-01 20:56:53', 1, NULL, NULL, 9, NULL, NULL, 7, NULL, 8.0, NULL, '6', '2010-08-01 20:56:53')[0m
+  [4;35;1mSQL (47.0ms)[0m   [0mCOMMIT[0m
+Rendering on_create
+Rendered _list_record_columns (0.0ms)
+Rendered _list_actions (16.0ms)
+Rendered _list_record (32.0ms)
+Rendered _messages (0.0ms)
+Completed in 172ms (View: 125, DB: 63) | 200 OK [http://localhost/academic_credentials?eid=199212e5c3b5be1807ea92207beafd08&nested=true&parent_column=academic_credential&parent_model=Student]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mStudent Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#nested (for 127.0.0.1 at 2010-08-01 16:56:57) [GET]
+  Parameters: {"associations"=>"employment", "adapter"=>"_list_inline_adapter", "id"=>"1"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Start rendering component ({:action=>"index", :params=>{:parent_column=>"employment", :format=>"html", :eid=>"d4bed92b625b5f8b952e17b4bca35c76", :parent_model=>"Student", :nested=>true}, :controller=>"employments"}): 
+
+
+Processing EmploymentsController#index to html (for 127.0.0.1 at 2010-08-01 16:56:57) [GET]
+  Parameters: {"parent_column"=>"employment", "eid"=>"d4bed92b625b5f8b952e17b4bca35c76", "nested"=>true, "id"=>nil, "parent_model"=>"Student"}
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(DISTINCT `employments`.id) AS count_all FROM `employments` LEFT OUTER JOIN `people` ON `people`.id = `employments`.student_id AND (`people`.`type` = 'Student' ) WHERE (((employments.student_id = '1'))) [0m
+  [4;36;1mEmployment Load (0.0ms)[0m   [0;1mSELECT `employments`.* FROM `employments` WHERE (((employments.student_id = '1'))) ORDER BY `employments`.`id` ASC LIMIT 0, 15[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT `employments`.* FROM `employments` WHERE (((employments.student_id = '1'))) ORDER BY `employments`.`id` ASC LIMIT 0, 15[0m
+Rendering list
+Rendered _list_header (0.0ms)
+Rendered _list_column_headings (16.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (15.0ms)
+Rendered _list_pagination (16.0ms)
+Rendered _list (125.0ms)
+Completed in 156ms (View: 156, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=employment&adapter=_list_inline_adapter]
+
+
+End of component rendering
+Rendered _nested (187.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 281ms (View: 0, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=employment&adapter=_list_inline_adapter]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mStudent Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAcademicCredential Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mAuInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing EmploymentsController#new (for 127.0.0.1 at 2010-08-01 16:57:03) [GET]
+  Parameters: {"eid"=>"d4bed92b625b5f8b952e17b4bca35c76", "parent_column"=>"employment", "nested"=>"true", "adapter"=>"_list_inline_adapter", "parent_model"=>"Student"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form (16.0ms)
+Rendered _create_form (32.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (15.0ms)
+Completed in 140ms (View: 15, DB: 0) | 200 OK [http://localhost/employments/new?_method=get&eid=d4bed92b625b5f8b952e17b4bca35c76&nested=true&parent_column=employment&parent_model=Student&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mEmployment Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mUsResidency Columns (15.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mVtInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing EmploymentsController#create (for 127.0.0.1 at 2010-08-01 16:57:12) [POST]
+  Parameters: {"eid"=>"d4bed92b625b5f8b952e17b4bca35c76", "parent_column"=>"employment", "nested"=>"true", "commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "parent_model"=>"Student", "record"=>{"mission"=>"1", "position"=>"iuhiluhui", "present_employer"=>"kiughiouh", "government"=>"1"}}
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+  [4;35;1mEmployment Load (0.0ms)[0m   [0mSELECT * FROM `employments` WHERE (`employments`.student_id = 1) LIMIT 1[0m
+  [4;36;1mEmployment Create (0.0ms)[0m   [0;1mINSERT INTO `employments` (`updated_at`, `student_id`, `mission`, `present_employer`, `position`, `government`, `created_at`) VALUES('2010-08-01 20:57:12', 1, 1, 'kiughiouh', 'iuhiluhui', 1, '2010-08-01 20:57:12')[0m
+  [4;35;1mSQL (31.0ms)[0m   [0mCOMMIT[0m
+Rendering on_create
+Rendered _list_record_columns (15.0ms)
+Rendered _list_actions (16.0ms)
+Rendered _list_record (31.0ms)
+Rendered _messages (0.0ms)
+Completed in 94ms (View: 47, DB: 62) | 200 OK [http://localhost/employments?eid=d4bed92b625b5f8b952e17b4bca35c76&nested=true&parent_column=employment&parent_model=Student]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mStudent Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#nested (for 127.0.0.1 at 2010-08-01 16:57:15) [GET]
+  Parameters: {"associations"=>"vt_info", "adapter"=>"_list_inline_adapter", "id"=>"1"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Start rendering component ({:action=>"index", :params=>{:parent_column=>"vt_info", :format=>"html", :eid=>"c37b81f176c70f6eabd1d8031eb6d280", :parent_model=>"Student", :nested=>true}, :controller=>"vt_infos"}): 
+
+
+Processing VtInfosController#index to html (for 127.0.0.1 at 2010-08-01 16:57:15) [GET]
+  Parameters: {"parent_column"=>"vt_info", "eid"=>"c37b81f176c70f6eabd1d8031eb6d280", "nested"=>true, "id"=>nil, "parent_model"=>"Student"}
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(DISTINCT `vt_infos`.id) AS count_all FROM `vt_infos` LEFT OUTER JOIN `people` ON `people`.id = `vt_infos`.student_id AND (`people`.`type` = 'Student' ) WHERE (((vt_infos.student_id = '1'))) [0m
+  [4;36;1mVtInfo Load (0.0ms)[0m   [0;1mSELECT `vt_infos`.* FROM `vt_infos` WHERE (((vt_infos.student_id = '1'))) ORDER BY `vt_infos`.`id` ASC LIMIT 0, 15[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT `vt_infos`.* FROM `vt_infos` WHERE (((vt_infos.student_id = '1'))) ORDER BY `vt_infos`.`id` ASC LIMIT 0, 15[0m
+Rendering list
+Rendered _list_header (16.0ms)
+Rendered _list_column_headings (15.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (16.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (47.0ms)
+Completed in 171ms (View: 171, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=vt_info&adapter=_list_inline_adapter]
+
+
+End of component rendering
+Rendered _nested (187.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 202ms (View: 0, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=vt_info&adapter=_list_inline_adapter]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mStudent Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAcademicCredential Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mAuInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing VtInfosController#new (for 127.0.0.1 at 2010-08-01 16:57:25) [GET]
+  Parameters: {"eid"=>"c37b81f176c70f6eabd1d8031eb6d280", "parent_column"=>"vt_info", "nested"=>"true", "adapter"=>"_list_inline_adapter", "parent_model"=>"Student"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (16.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form (16.0ms)
+Rendered _create_form (31.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (15.0ms)
+Completed in 156ms (View: 109, DB: 0) | 200 OK [http://localhost/vt_infos/new?_method=get&eid=c37b81f176c70f6eabd1d8031eb6d280&nested=true&parent_column=vt_info&parent_model=Student&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mVtInfo Columns (15.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing VtInfosController#create (for 127.0.0.1 at 2010-08-01 16:57:36) [POST]
+  Parameters: {"eid"=>"c37b81f176c70f6eabd1d8031eb6d280", "parent_column"=>"vt_info", "nested"=>"true", "commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "parent_model"=>"Student", "record"=>{"department"=>"joij", "student_pid"=>"iuhiujhioj", "degree"=>"oij", "area"=>"oij", "degree_program"=>"oij", "year"=>"jio", "semester_admitted"=>"oijo", "student_id_number"=>"oijoijoi"}}
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+  [4;35;1mVtInfo Load (0.0ms)[0m   [0mSELECT * FROM `vt_infos` WHERE (`vt_infos`.student_id = 1) LIMIT 1[0m
+  [4;36;1mVtInfo Create (0.0ms)[0m   [0;1mINSERT INTO `vt_infos` (`student_pid`, `department`, `degree`, `updated_at`, `student_id`, `degree_program`, `area`, `year`, `student_id_number`, `semester_admitted`, `created_at`) VALUES('iuhiujhioj', 'joij', 'oij', '2010-08-01 20:57:37', 1, 'oij', 'oij', NULL, 'oijoijoi', 'oijo', '2010-08-01 20:57:37')[0m
+  [4;35;1mSQL (16.0ms)[0m   [0mCOMMIT[0m
+Rendering on_create
+Rendered _list_record_columns (0.0ms)
+Rendered _list_actions (15.0ms)
+Rendered _list_record (15.0ms)
+Rendered _messages (0.0ms)
+Completed in 172ms (View: 124, DB: 31) | 200 OK [http://localhost/vt_infos?eid=c37b81f176c70f6eabd1d8031eb6d280&nested=true&parent_column=vt_info&parent_model=Student]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mStudent Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (15.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#nested (for 127.0.0.1 at 2010-08-01 16:57:40) [GET]
+  Parameters: {"associations"=>"au_info", "adapter"=>"_list_inline_adapter", "id"=>"1"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Start rendering component ({:action=>"index", :params=>{:parent_column=>"au_info", :format=>"html", :eid=>"c99b344fed7661f9047e32c490de82a5", :parent_model=>"Student", :nested=>true}, :controller=>"au_infos"}): 
+
+
+Processing AuInfosController#index to html (for 127.0.0.1 at 2010-08-01 16:57:40) [GET]
+  Parameters: {"parent_column"=>"au_info", "eid"=>"c99b344fed7661f9047e32c490de82a5", "nested"=>true, "id"=>nil, "parent_model"=>"Student"}
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(DISTINCT `au_infos`.id) AS count_all FROM `au_infos` LEFT OUTER JOIN `people` ON `people`.id = `au_infos`.student_id AND (`people`.`type` = 'Student' ) WHERE (((au_infos.student_id = '1'))) [0m
+  [4;36;1mAuInfo Load (0.0ms)[0m   [0;1mSELECT `au_infos`.* FROM `au_infos` WHERE (((au_infos.student_id = '1'))) ORDER BY `au_infos`.`id` ASC LIMIT 0, 15[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT `au_infos`.* FROM `au_infos` WHERE (((au_infos.student_id = '1'))) ORDER BY `au_infos`.`id` ASC LIMIT 0, 15[0m
+Rendering list
+Rendered _list_header (16.0ms)
+Rendered _list_column_headings (15.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (0.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (125.0ms)
+Completed in 156ms (View: 156, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=au_info&adapter=_list_inline_adapter]
+
+
+End of component rendering
+Rendered _nested (172.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (15.0ms)
+Completed in 296ms (View: 15, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=au_info&adapter=_list_inline_adapter]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mAuInfo Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mStudent Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAcademicCredential Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing AuInfosController#new (for 127.0.0.1 at 2010-08-01 16:57:45) [GET]
+  Parameters: {"eid"=>"c99b344fed7661f9047e32c490de82a5", "parent_column"=>"au_info", "nested"=>"true", "adapter"=>"_list_inline_adapter", "parent_model"=>"Student"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (15.0ms)
+Rendered _form (31.0ms)
+Rendered _create_form (31.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 140ms (View: 0, DB: 0) | 200 OK [http://localhost/au_infos/new?_method=get&eid=c99b344fed7661f9047e32c490de82a5&nested=true&parent_column=au_info&parent_model=Student&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mAuInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mStudent Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mVtInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing AuInfosController#create (for 127.0.0.1 at 2010-08-01 16:57:58) [POST]
+  Parameters: {"eid"=>"c99b344fed7661f9047e32c490de82a5", "parent_column"=>"au_info", "nested"=>"true", "commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "parent_model"=>"Student", "record"=>{"department"=>"iuhiu", "degree"=>"jhui", "area"=>"joi", "degree_program"=>"jhiou", "year"=>"989898", "semester_admitted"=>"joi"}}
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+  [4;35;1mAuInfo Load (0.0ms)[0m   [0mSELECT * FROM `au_infos` WHERE (`au_infos`.student_id = 1) LIMIT 1[0m
+  [4;36;1mAuInfo Create (0.0ms)[0m   [0;1mINSERT INTO `au_infos` (`department`, `degree`, `updated_at`, `student_id`, `degree_program`, `area`, `year`, `semester_admitted`, `created_at`) VALUES('iuhiu', 'jhui', '2010-08-01 20:57:58', 1, 'jhiou', 'joi', 989898, 'joi', '2010-08-01 20:57:58')[0m
+  [4;35;1mSQL (31.0ms)[0m   [0mCOMMIT[0m
+Rendering on_create
+Rendered _list_record_columns (0.0ms)
+Rendered _list_actions (0.0ms)
+Rendered _list_record (16.0ms)
+Rendered _messages (0.0ms)
+Completed in 93ms (View: 47, DB: 46) | 200 OK [http://localhost/au_infos?eid=c99b344fed7661f9047e32c490de82a5&nested=true&parent_column=au_info&parent_model=Student]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#nested (for 127.0.0.1 at 2010-08-01 16:58:01) [GET]
+  Parameters: {"associations"=>"vtmena_academic_progress", "adapter"=>"_list_inline_adapter", "id"=>"1"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Start rendering component ({:action=>"index", :params=>{:parent_column=>"vtmena_academic_progress", :format=>"html", :eid=>"a4e5616e9e50b22d2e8129f4dc663ab7", :parent_model=>"Student", :nested=>true}, :controller=>"vtmena_academic_progresses"}): 
+
+
+Processing VtmenaAcademicProgressesController#index to html (for 127.0.0.1 at 2010-08-01 16:58:01) [GET]
+  Parameters: {"parent_column"=>"vtmena_academic_progress", "eid"=>"a4e5616e9e50b22d2e8129f4dc663ab7", "nested"=>true, "id"=>nil, "parent_model"=>"Student"}
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(DISTINCT `vtmena_academic_progresses`.id) AS count_all FROM `vtmena_academic_progresses` LEFT OUTER JOIN `people` ON `people`.id = `vtmena_academic_progresses`.student_id AND (`people`.`type` = 'Student' ) WHERE (((vtmena_academic_progresses.student_id = '1'))) [0m
+  [4;36;1mVtmenaAcademicProgress Load (0.0ms)[0m   [0;1mSELECT `vtmena_academic_progresses`.* FROM `vtmena_academic_progresses` WHERE (((vtmena_academic_progresses.student_id = '1'))) ORDER BY `vtmena_academic_progresses`.`id` ASC LIMIT 0, 15[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT `vtmena_academic_progresses`.* FROM `vtmena_academic_progresses` WHERE (((vtmena_academic_progresses.student_id = '1'))) ORDER BY `vtmena_academic_progresses`.`id` ASC LIMIT 0, 15[0m
+Rendering list
+Rendered _list_header (0.0ms)
+Rendered _list_column_headings (16.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (0.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (62.0ms)
+Completed in 187ms (View: 172, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=vtmena_academic_progress&adapter=_list_inline_adapter]
+
+
+End of component rendering
+Rendered _nested (203.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (16.0ms)
+Completed in 219ms (View: 16, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=vtmena_academic_progress&adapter=_list_inline_adapter]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+  [4;35;1mStudent Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAcademicCredential Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mAuInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mVtInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+
+
+Processing VtmenaAcademicProgressesController#new (for 127.0.0.1 at 2010-08-01 16:58:06) [GET]
+  Parameters: {"eid"=>"a4e5616e9e50b22d2e8129f4dc663ab7", "parent_column"=>"vtmena_academic_progress", "nested"=>"true", "adapter"=>"_list_inline_adapter", "parent_model"=>"Student"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Rendered _form_attribute (16.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (15.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form (31.0ms)
+Rendered _create_form (47.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (94.0ms)
+Completed in 156ms (View: 94, DB: 0) | 200 OK [http://localhost/vtmena_academic_progresses/new?_method=get&eid=a4e5616e9e50b22d2e8129f4dc663ab7&nested=true&parent_column=vtmena_academic_progress&parent_model=Student&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+
+
+Processing VtmenaAcademicProgressesController#create (for 127.0.0.1 at 2010-08-01 16:58:13) [POST]
+  Parameters: {"eid"=>"a4e5616e9e50b22d2e8129f4dc663ab7", "parent_column"=>"vtmena_academic_progress", "nested"=>"true", "commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "parent_model"=>"Student", "record"=>{"vt_research_credits"=>"7", "vt_gpa"=>"7", "au_research_credits"=>"", "research_topic"=>"7", "vt_course_credits"=>"7", "au_course_credits"=>"", "total_research_credits"=>"7", "total_course_credits"=>"7", "au_gpa"=>""}}
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+  [4;35;1mVtmenaAcademicProgress Load (0.0ms)[0m   [0mSELECT * FROM `vtmena_academic_progresses` WHERE (`vtmena_academic_progresses`.student_id = 1) LIMIT 1[0m
+  [4;36;1mVtmenaAcademicProgress Create (0.0ms)[0m   [0;1mINSERT INTO `vtmena_academic_progresses` (`vt_gpa`, `vt_research_credits`, `au_research_credits`, `updated_at`, `student_id`, `research_topic`, `vt_course_credits`, `au_course_credits`, `au_gpa`, `total_course_credits`, `total_research_credits`, `created_at`) VALUES(7.0, 7, NULL, '2010-08-01 20:58:13', 1, '7', 7, NULL, NULL, 7, 7, '2010-08-01 20:58:13')[0m
+  [4;35;1mSQL (47.0ms)[0m   [0mCOMMIT[0m
+Rendering on_create
+Rendered _list_record_columns (0.0ms)
+Rendered _list_actions (94.0ms)
+Rendered _list_record (109.0ms)
+Rendered _messages (0.0ms)
+Completed in 187ms (View: 125, DB: 77) | 200 OK [http://localhost/vtmena_academic_progresses?eid=a4e5616e9e50b22d2e8129f4dc663ab7&nested=true&parent_column=vtmena_academic_progress&parent_model=Student]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#nested (for 127.0.0.1 at 2010-08-01 16:58:22) [GET]
+  Parameters: {"associations"=>"academic_milestones", "adapter"=>"_list_inline_adapter", "id"=>"1"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+  [4;35;1mAcademicMilestone Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_milestones`[0m
+Start rendering component ({:action=>"index", :params=>{:parent_column=>"academic_milestones", :format=>"html", :eid=>"24fab405609ae5f1090b159283b600a7", :parent_model=>"Student", :nested=>true}, :controller=>"academic_milestones"}): 
+
+
+Processing AcademicMilestonesController#index to html (for 127.0.0.1 at 2010-08-01 16:58:22) [GET]
+  Parameters: {"parent_column"=>"academic_milestones", "eid"=>"24fab405609ae5f1090b159283b600a7", "nested"=>true, "id"=>nil, "parent_model"=>"Student"}
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(DISTINCT `academic_milestones`.id) AS count_all FROM `academic_milestones` LEFT OUTER JOIN `people` ON `people`.id = `academic_milestones`.student_id AND (`people`.`type` = 'Student' ) WHERE (((academic_milestones.student_id = '1'))) [0m
+  [4;35;1mAcademicMilestone Load (0.0ms)[0m   [0mSELECT `academic_milestones`.* FROM `academic_milestones` WHERE (((academic_milestones.student_id = '1'))) ORDER BY `academic_milestones`.`date` ASC LIMIT 0, 15[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT `academic_milestones`.* FROM `academic_milestones` WHERE (((academic_milestones.student_id = '1'))) ORDER BY `academic_milestones`.`date` ASC LIMIT 0, 15[0m
+Rendering list
+Rendered _list_header (0.0ms)
+Rendered _list_column_headings (0.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (0.0ms)
+Rendered _list_pagination (16.0ms)
+Rendered _list (47.0ms)
+Completed in 156ms (View: 156, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=academic_milestones&adapter=_list_inline_adapter]
+
+
+End of component rendering
+Rendered _nested (187.0ms)
+Rendered _messages (16.0ms)
+Rendered _list_inline_adapter (94.0ms)
+Completed in 297ms (View: 94, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=academic_milestones&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mAcademicMilestone Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_milestones`[0m
+  [4;36;1mStudent Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing AcademicMilestonesController#new (for 127.0.0.1 at 2010-08-01 16:58:27) [GET]
+  Parameters: {"eid"=>"24fab405609ae5f1090b159283b600a7", "parent_column"=>"academic_milestones", "nested"=>"true", "adapter"=>"_list_inline_adapter", "parent_model"=>"Student"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form (16.0ms)
+Rendered _create_form (110.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (15.0ms)
+Completed in 140ms (View: 15, DB: 0) | 200 OK [http://localhost/academic_milestones/new?_method=get&eid=24fab405609ae5f1090b159283b600a7&nested=true&parent_column=academic_milestones&parent_model=Student&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mAcademicMilestone Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_milestones`[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing AcademicMilestonesController#create (for 127.0.0.1 at 2010-08-01 16:58:41) [POST]
+  Parameters: {"eid"=>"24fab405609ae5f1090b159283b600a7", "parent_column"=>"academic_milestones", "nested"=>"true", "commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "parent_model"=>"Student", "record"=>{"status"=>"uijhioujoiuj", "name"=>"uhiujhuijhi", "date(1i)"=>"2007", "date(2i)"=>"", "date(3i)"=>""}}
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mStudent Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+  [4;36;1mAcademicMilestone Create (0.0ms)[0m   [0;1mINSERT INTO `academic_milestones` (`name`, `status`, `updated_at`, `student_id`, `date`, `created_at`) VALUES('uhiujhuijhi', 'uijhioujoiuj', '2010-08-01 20:58:41', 1, '2007-01-01', '2010-08-01 20:58:41')[0m
+  [4;35;1mSQL (46.0ms)[0m   [0mCOMMIT[0m
+Rendering on_create
+Rendered _list_record_columns (0.0ms)
+Rendered _list_actions (0.0ms)
+Rendered _list_record (16.0ms)
+Rendered _messages (0.0ms)
+Completed in 93ms (View: 47, DB: 78) | 200 OK [http://localhost/academic_milestones?eid=24fab405609ae5f1090b159283b600a7&nested=true&parent_column=academic_milestones&parent_model=Student]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mVtInfo Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (15.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#nested (for 127.0.0.1 at 2010-08-01 16:58:48) [GET]
+  Parameters: {"associations"=>"registered_classes", "adapter"=>"_list_inline_adapter", "id"=>"1"}
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+  [4;35;1mRegisteredClass Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `registered_classes`[0m
+  [4;36;1mClassSchedule Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `class_schedules`[0m
+  [4;35;1mCourse Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+Start rendering component ({:action=>"index", :params=>{:parent_column=>"registered_classes", :format=>"html", :eid=>"17ca7c4faccc4560103f7110f10ac7b7", :parent_model=>"Student", :nested=>true}, :controller=>"registered_classes"}): 
+
+
+Processing RegisteredClassesController#index to html (for 127.0.0.1 at 2010-08-01 16:58:49) [GET]
+  Parameters: {"parent_column"=>"registered_classes", "eid"=>"17ca7c4faccc4560103f7110f10ac7b7", "nested"=>true, "id"=>nil, "parent_model"=>"Student"}
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(DISTINCT `registered_classes`.id) AS count_all FROM `registered_classes` LEFT OUTER JOIN `class_schedules` ON `class_schedules`.id = `registered_classes`.class_schedule_id LEFT OUTER JOIN `people` ON `people`.id = `registered_classes`.student_id AND (`people`.`type` = 'Student' ) WHERE (((registered_classes.student_id = '1'))) [0m
+  [4;35;1mRegisteredClass Load (0.0ms)[0m   [0mSELECT `registered_classes`.* FROM `registered_classes` WHERE (((registered_classes.student_id = '1'))) ORDER BY `registered_classes`.`id` ASC LIMIT 0, 15[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT `registered_classes`.* FROM `registered_classes` WHERE (((registered_classes.student_id = '1'))) ORDER BY `registered_classes`.`id` ASC LIMIT 0, 15[0m
+Rendering list
+Rendered _list_header (16.0ms)
+Rendered _list_column_headings (15.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (16.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (124.0ms)
+Completed in 156ms (View: 156, DB: 32) | 200 OK [http://localhost/students/1/nested?_method=get&associations=registered_classes&adapter=_list_inline_adapter]
+
+
+End of component rendering
+Rendered _nested (312.0ms)
+Rendered _messages (16.0ms)
+Rendered _list_inline_adapter (16.0ms)
+Completed in 343ms (View: 16, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=registered_classes&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mStudent Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAcademicCredential Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mAuInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mVtInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+
+
+Processing StudentsController#nested (for 127.0.0.1 at 2010-08-01 16:58:52) [GET]
+  Parameters: {"associations"=>"achievements", "adapter"=>"_list_inline_adapter", "id"=>"1"}
+  [4;35;1mStudent Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+  [4;36;1mAchievement Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `achievements`[0m
+Start rendering component ({:action=>"index", :params=>{:parent_column=>"achievements", :format=>"html", :eid=>"0cdf37bad785e9a12728954f85eca422", :parent_model=>"Person", :nested=>true}, :controller=>"achievements"}): 
+
+
+Processing AchievementsController#index to html (for 127.0.0.1 at 2010-08-01 16:58:52) [GET]
+  Parameters: {"parent_column"=>"achievements", "eid"=>"0cdf37bad785e9a12728954f85eca422", "nested"=>true, "id"=>nil, "parent_model"=>"Person"}
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(DISTINCT `achievements`.id) AS count_all FROM `achievements` LEFT OUTER JOIN `people` ON `people`.id = `achievements`.person_id WHERE (((achievements.person_id = '1'))) [0m
+  [4;36;1mAchievement Load (0.0ms)[0m   [0;1mSELECT `achievements`.* FROM `achievements` WHERE (((achievements.person_id = '1'))) ORDER BY `achievements`.`year` DESC LIMIT 0, 15[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT `achievements`.* FROM `achievements` WHERE (((achievements.person_id = '1'))) ORDER BY `achievements`.`year` DESC LIMIT 0, 15[0m
+Rendering list
+Rendered _list_header (0.0ms)
+Rendered _list_column_headings (15.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (16.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (31.0ms)
+Completed in 78ms (View: 62, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=achievements&adapter=_list_inline_adapter]
+
+
+End of component rendering
+Rendered _nested (187.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 297ms (View: 94, DB: 0) | 200 OK [http://localhost/students/1/nested?_method=get&associations=achievements&adapter=_list_inline_adapter]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mAchievement Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `achievements`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+
+
+Processing AchievementsController#new (for 127.0.0.1 at 2010-08-01 16:58:55) [GET]
+  Parameters: {"eid"=>"0cdf37bad785e9a12728954f85eca422", "parent_column"=>"achievements", "nested"=>"true", "adapter"=>"_list_inline_adapter", "parent_model"=>"Person"}
+  [4;35;1mPerson Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+Rendered _form_attribute (16.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form (16.0ms)
+Rendered _create_form (32.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 156ms (View: 15, DB: 0) | 200 OK [http://localhost/achievements/new?_method=get&eid=0cdf37bad785e9a12728954f85eca422&nested=true&parent_column=achievements&parent_model=Person&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mAchievement Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `achievements`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+
+
+Processing AchievementsController#create (for 127.0.0.1 at 2010-08-01 16:59:02) [POST]
+  Parameters: {"eid"=>"0cdf37bad785e9a12728954f85eca422", "parent_column"=>"achievements", "nested"=>"true", "commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "parent_model"=>"Person", "record"=>{"title"=>"iou", "kind"=>"khiuh", "outlet"=>"ljl", "year"=>"kjlkj", "authors"=>"jhlkj"}}
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mPerson Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAchievement Create (0.0ms)[0m   [0mINSERT INTO `achievements` (`updated_at`, `kind`, `title`, `outlet`, `year`, `authors`, `person_id`, `created_at`) VALUES('2010-08-01 20:59:02', 'khiuh', 'iou', 'ljl', NULL, 'jhlkj', 1, '2010-08-01 20:59:02')[0m
+  [4;36;1mSQL (16.0ms)[0m   [0;1mCOMMIT[0m
+Rendering on_create
+Rendered _list_record_columns (0.0ms)
+Rendered _list_actions (15.0ms)
+Rendered _list_record (31.0ms)
+Rendered _messages (0.0ms)
+Completed in 93ms (View: 46, DB: 16) | 200 OK [http://localhost/achievements?eid=0cdf37bad785e9a12728954f85eca422&nested=true&parent_column=achievements&parent_model=Person]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mProfessor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#index (for 127.0.0.1 at 2010-08-01 16:59:14) [GET]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;35;1mProfessor Load (0.0ms)[0m   [0mSELECT `people`.* FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) ORDER BY `people`.`first_name` ASC, `people`.`last_name` ASC LIMIT 0, 15[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT `people`.* FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) ORDER BY `people`.`first_name` ASC, `people`.`last_name` ASC LIMIT 0, 15[0m
+Rendering template within layouts/application
+Rendering list
+Rendered _list_header (16.0ms)
+Rendered _list_column_headings (15.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (0.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (47.0ms)
+Completed in 172ms (View: 156, DB: 16) | 200 OK [http://localhost/professors]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mProfessor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#new (for 127.0.0.1 at 2010-08-01 16:59:18) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter"}
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+  [4;36;1mPhone Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `phones`[0m
+Rendered _horizontal_subform_header (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `phones` WHERE ((owner_id IS NULL)) [0m
+Rendered _form_association_footer (15.0ms)
+Rendered _horizontal_subform (124.0ms)
+Rendered _form_association (124.0ms)
+  [4;36;1mInstructor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `instructors`[0m
+  [4;35;1mClassSchedule Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `class_schedules`[0m
+  [4;36;1mCourse Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+Rendered _horizontal_subform_header (0.0ms)
+  [4;35;1mClassSchedule Load (0.0ms)[0m   [0mSELECT * FROM `class_schedules` [0m
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `instructors` WHERE ((professor_id IS NULL)) [0m
+Rendered _form_association_footer (0.0ms)
+Rendered _horizontal_subform (16.0ms)
+Rendered _form_association (16.0ms)
+Rendered _form (234.0ms)
+Rendered _create_form (250.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (94.0ms)
+Completed in 374ms (View: 109, DB: 0) | 200 OK [http://localhost/professors/new?_method=get&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mProfessor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#edit_associated (for 127.0.0.1 at 2010-08-01 16:59:29) [GET]
+  Parameters: {"association"=>"phones"}
+  [4;36;1mPhone Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `phones`[0m
+Rendering edit_associated
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+Completed in 47ms (View: 47, DB: 0) | 200 OK [http://localhost/professors/edit_associated?association=phones]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mProfessor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#create (for 127.0.0.1 at 2010-08-01 16:59:40) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "record"=>{"instructor"=>{"1280696359154"=>{"class_schedule"=>""}}, "department"=>"lkjlk", "middle_names"=>"jholjl", "university"=>"lkjlkj", "first_name"=>"iluhli", "phones"=>{"1280696358982"=>{"number"=>"kljlkjlkj"}, "1280696369840"=>{"number"=>"iuhiujhioj"}}, "last_name"=>"kjlkj", "email"=>"jlkjlk"}}
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mPhone Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `phones`[0m
+  [4;36;1mInstructor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `instructors`[0m
+  [4;35;1mProfessor Create (0.0ms)[0m   [0mINSERT INTO `people` (`city`, `department`, `middle_names`, `postal_code`, `updated_at`, `university`, `type`, `address_1`, `governorate`, `address_2`, `first_name`, `last_name`, `email`, `created_at`) VALUES(NULL, 'lkjlk', 'jholjl', NULL, '2010-08-01 20:59:40', 'lkjlkj', 'Professor', NULL, NULL, NULL, 'iluhli', 'kjlkj', 'jlkjlk', '2010-08-01 20:59:40')[0m
+  [4;36;1mPhone Create (0.0ms)[0m   [0;1mINSERT INTO `phones` (`updated_at`, `number`, `owner_id`, `owner_type`, `created_at`) VALUES('2010-08-01 20:59:40', 'kljlkjlkj', 2, 0, '2010-08-01 20:59:40')[0m
+  [4;35;1mPhone Create (0.0ms)[0m   [0mINSERT INTO `phones` (`updated_at`, `number`, `owner_id`, `owner_type`, `created_at`) VALUES('2010-08-01 20:59:40', 'iuhiujhioj', 2, 0, '2010-08-01 20:59:40')[0m
+  [4;36;1mSQL (47.0ms)[0m   [0;1mCOMMIT[0m
+Rendering on_create
+Rendered _list_record_columns (15.0ms)
+Rendered _list_actions (15.0ms)
+Rendered _list_record (124.0ms)
+Rendered _messages (0.0ms)
+Completed in 234ms (View: 140, DB: 47) | 200 OK [http://localhost/professors]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mCourse Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+
+
+Processing CoursesController#index (for 127.0.0.1 at 2010-08-01 16:59:49) [GET]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `courses` [0m
+  [4;35;1mCourse Load (0.0ms)[0m   [0mSELECT `courses`.* FROM `courses` ORDER BY `courses`.`university` ASC, `courses`.`number` ASC LIMIT 0, 15[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT `courses`.* FROM `courses` ORDER BY `courses`.`university` ASC, `courses`.`number` ASC LIMIT 0, 15[0m
+Rendering template within layouts/application
+Rendering list
+Rendered _list_header (16.0ms)
+Rendered _list_column_headings (0.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (0.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (47.0ms)
+Completed in 171ms (View: 171, DB: 0) | 200 OK [http://localhost/courses]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mCourse Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+
+
+Processing CoursesController#new (for 127.0.0.1 at 2010-08-01 16:59:52) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter"}
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form (0.0ms)
+Rendered _create_form (31.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 63ms (View: 16, DB: 0) | 200 OK [http://localhost/courses/new?_method=get&adapter=_list_inline_adapter]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mCourse Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+
+
+Processing CoursesController#create (for 127.0.0.1 at 2010-08-01 16:59:59) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "record"=>{"number"=>"ikuhiuhiuh", "university"=>"iuhiuh", "topic"=>"iuhuihiuh"}}
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mCourse Create (0.0ms)[0m   [0;1mINSERT INTO `courses` (`updated_at`, `number`, `university`, `topic`, `created_at`) VALUES('2010-08-01 20:59:59', 'ikuhiuhiuh', 'iuhiuh', 'iuhuihiuh', '2010-08-01 20:59:59')[0m
+  [4;35;1mSQL (47.0ms)[0m   [0mCOMMIT[0m
+Rendering on_create
+Rendered _list_record_columns (0.0ms)
+Rendered _list_actions (0.0ms)
+Rendered _list_record (16.0ms)
+Rendered _messages (0.0ms)
+Completed in 188ms (View: 125, DB: 47) | 200 OK [http://localhost/courses]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-08-01 17:00:08) [GET]
+
+ActionController::RoutingError (No route matches "/classes" with {:method=>:get}):
+  C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mClassSchedule Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `class_schedules`[0m
+  [4;35;1mCourse Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+
+
+Processing ClassSchedulesController#index (for 127.0.0.1 at 2010-08-01 17:00:21) [GET]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `class_schedules` [0m
+  [4;35;1mClassSchedule Load (0.0ms)[0m   [0mSELECT `class_schedules`.* FROM `class_schedules` ORDER BY `class_schedules`.`year` ASC, `class_schedules`.`semester` ASC LIMIT 0, 15[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT `class_schedules`.* FROM `class_schedules` ORDER BY `class_schedules`.`year` ASC, `class_schedules`.`semester` ASC LIMIT 0, 15[0m
+Rendering template within layouts/application
+Rendering list
+Rendered _list_header (16.0ms)
+Rendered _list_column_headings (15.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (0.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (125.0ms)
+Completed in 156ms (View: 156, DB: 16) | 200 OK [http://localhost/class_schedules]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mClassSchedule Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `class_schedules`[0m
+  [4;36;1mCourse Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+
+
+Processing ClassSchedulesController#new (for 127.0.0.1 at 2010-08-01 17:00:24) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter"}
+Rendered _horizontal_subform_header (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (93.0ms)
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `courses` [0m
+  [4;36;1mCourse Load (0.0ms)[0m   [0;1mSELECT * FROM `courses` [0m
+Rendered _form_association_footer (16.0ms)
+Rendered _horizontal_subform (125.0ms)
+Rendered _form_association (141.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+  [4;35;1mInstructor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `instructors`[0m
+  [4;36;1mProfessor Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mUsResidency Columns (62.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+Rendered _horizontal_subform_header (0.0ms)
+  [4;35;1mProfessor Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) [0m
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `instructors` WHERE ((class_schedule_id IS NULL)) [0m
+Rendered _form_association_footer (0.0ms)
+Rendered _horizontal_subform (0.0ms)
+Rendered _form_association (16.0ms)
+  [4;35;1mRegisteredClass Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `registered_classes`[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mVtInfo Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+Rendered _horizontal_subform_header (0.0ms)
+  [4;36;1mStudent Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE ( (`people`.`type` = 'Student' ) ) [0m
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `registered_classes` WHERE ((class_schedule_id IS NULL)) [0m
+Rendered _form_association_footer (15.0ms)
+Rendered _horizontal_subform (15.0ms)
+Rendered _form_association (31.0ms)
+Rendered _form (780.0ms)
+Rendered _create_form (795.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (16.0ms)
+Completed in 827ms (View: 16, DB: 0) | 200 OK [http://localhost/class_schedules/new?_method=get&adapter=_list_inline_adapter]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mClassSchedule Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `class_schedules`[0m
+  [4;35;1mCourse Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+
+
+Processing ClassSchedulesController#create (for 127.0.0.1 at 2010-08-01 17:00:50) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "associated_id"=>"1", "record"=>{"instructors"=>{"1280696424627"=>{"professor"=>"2"}}, "registered_classes"=>{"1280696424986"=>{"grade"=>"", "student"=>""}}, "semester"=>"Fall", "offered"=>"1", "year"=>"2999", "vtel"=>"kuhku", "course"=>{"number"=>"", "university"=>"", "topic"=>""}}}
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mInstructor Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `instructors`[0m
+  [4;36;1mProfessor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mProfessor Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;36;1mRegisteredClass Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `registered_classes`[0m
+  [4;35;1mClassSchedule Create (0.0ms)[0m   [0mINSERT INTO `class_schedules` (`updated_at`, `semester`, `offered`, `year`, `course_id`, `vtel`, `created_at`) VALUES('2010-08-01 21:00:50', 'Fall', 1, '2999', NULL, 'kuhku', '2010-08-01 21:00:50')[0m
+  [4;36;1mInstructor Create (0.0ms)[0m   [0;1mINSERT INTO `instructors` (`professor_id`, `updated_at`, `class_schedule_id`, `created_at`) VALUES(2, '2010-08-01 21:00:50', 1, '2010-08-01 21:00:50')[0m
+  [4;35;1mSQL (47.0ms)[0m   [0mCOMMIT[0m
+Rendering on_create
+Sun Aug 01 17:00:50 -0400 2010#<NoMethodError: undefined method `to_label' for nil:NilClass> -- on the ActiveScaffold column = :instructors in ClassSchedulesController
+
+ActionView::TemplateError (undefined method `to_label' for nil:NilClass) on line #4 of vendor/plugins/active_scaffold/frontends/default/views/_list_record_columns.html.erb:
+1:   <%= content_tag :td, mark_record(marked_records.include?(record.id.to_s), :id => record.id), :class => 'mark_record_column' if active_scaffold_config.list.mark_records %>
+2: <% active_scaffold_config.list.columns.each do |column| %>
+3:   <% authorized = record.authorized_for?(:crud_type => :read, :column => column.name) -%>
+4:   <% column_value = authorized ? get_column_value(record, column) : active_scaffold_config.list.empty_field_text -%>
+5: 
+6:   <td class="<%= column_class(column, column_value) %>" >
+7:     <%= authorized ? render_list_column(column_value, column, record) : column_value %>
+
+    app/models/class_schedule.rb:8:in `to_label'
+    app/models/instructor.rb:7:in `to_label'
+    vendor/plugins/active_scaffold/frontends/default/views/_list_record_columns.html.erb:4
+    vendor/plugins/active_scaffold/frontends/default/views/_list_record_columns.html.erb:2
+    vendor/plugins/active_scaffold/frontends/default/views/_list_record.html.erb:10
+    vendor/plugins/active_scaffold/frontends/default/views/on_create.js.rjs:6:in `__instance_exec0'
+    vendor/plugins/active_scaffold/frontends/default/views/on_create.js.rjs:1:in `_run_rjs_vendor47plugins47active_scaffold47frontends47default47views47on_create46js46rjs'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (187.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mClassSchedule Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `class_schedules`[0m
+  [4;35;1mCourse Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+
+
+Processing ClassSchedulesController#edit_associated (for 127.0.0.1 at 2010-08-01 17:01:31) [GET]
+  Parameters: {"association"=>"course", "associated_id"=>"1"}
+  [4;36;1mCourse Load (0.0ms)[0m   [0;1mSELECT * FROM `courses` WHERE (`courses`.`id` = 1) [0m
+Rendering edit_associated
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (15.0ms)
+Completed in 31ms (View: 31, DB: 16) | 200 OK [http://localhost/class_schedules/edit_associated?associated_id=1&association=course]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mClassSchedule Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `class_schedules`[0m
+  [4;36;1mCourse Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+
+
+Processing ClassSchedulesController#create (for 127.0.0.1 at 2010-08-01 17:01:38) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "associated_id"=>"1", "record"=>{"instructors"=>{"1280696424627"=>{"professor"=>"2"}}, "registered_classes"=>{"1280696424986"=>{"grade"=>"", "student"=>""}}, "semester"=>"Fall", "offered"=>"1", "year"=>"2999", "vtel"=>"kuhku", "course"=>{"number"=>"ikuhiuhiuh", "university"=>"iuhiuh", "topic"=>"iuhuihiuh", "id"=>"1"}}}
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mCourse Load (0.0ms)[0m   [0;1mSELECT * FROM `courses` WHERE (`courses`.`id` = 1) [0m
+  [4;35;1mInstructor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `instructors`[0m
+  [4;36;1mProfessor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mProfessor Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;36;1mRegisteredClass Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `registered_classes`[0m
+  [4;35;1mClassSchedule Create (0.0ms)[0m   [0mINSERT INTO `class_schedules` (`updated_at`, `semester`, `offered`, `year`, `course_id`, `vtel`, `created_at`) VALUES('2010-08-01 21:01:38', 'Fall', 1, '2999', 1, 'kuhku', '2010-08-01 21:01:38')[0m
+  [4;36;1mInstructor Create (0.0ms)[0m   [0;1mINSERT INTO `instructors` (`professor_id`, `updated_at`, `class_schedule_id`, `created_at`) VALUES(2, '2010-08-01 21:01:38', 2, '2010-08-01 21:01:38')[0m
+  [4;35;1mSQL (47.0ms)[0m   [0mCOMMIT[0m
+Rendering on_create
+Rendered _list_record_columns (15.0ms)
+Rendered _list_actions (16.0ms)
+Rendered _list_record (31.0ms)
+Rendered _messages (0.0ms)
+Completed in 265ms (View: 47, DB: 77) | 200 OK [http://localhost/class_schedules]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mClassSchedule Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `class_schedules`[0m
+  [4;35;1mCourse Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+
+
+Processing ClassSchedulesController#show (for 127.0.0.1 at 2010-08-01 17:01:44) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"2", "associated_id"=>"1"}
+  [4;36;1mClassSchedule Load (0.0ms)[0m   [0;1mSELECT * FROM `class_schedules` WHERE (`class_schedules`.`id` = 2) [0m
+  [4;35;1mCourse Load (0.0ms)[0m   [0mSELECT * FROM `courses` WHERE (`courses`.`id` = 1) [0m
+  [4;36;1mInstructor Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `instructors`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `instructors` WHERE (`instructors`.class_schedule_id = 2) [0m
+  [4;36;1mInstructor Load (0.0ms)[0m   [0;1mSELECT * FROM `instructors` WHERE (`instructors`.class_schedule_id = 2) LIMIT 4[0m
+  [4;35;1mProfessor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mProfessor Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `class_schedules` WHERE (`class_schedules`.`id` = 2) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `courses` WHERE (`courses`.`id` = 1) [0m
+  [4;35;1mRegisteredClass Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `registered_classes`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `registered_classes` WHERE (`registered_classes`.class_schedule_id = 2) [0m
+Rendered _show_columns (31.0ms)
+Rendered _show (31.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (16.0ms)
+Completed in 141ms (View: 94, DB: 0) | 200 OK [http://localhost/class_schedules/2?_method=get&associated_id=1&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mClassSchedule Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `class_schedules`[0m
+  [4;36;1mCourse Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+
+
+Processing ClassSchedulesController#row (for 127.0.0.1 at 2010-08-01 17:01:48) [GET]
+  Parameters: {"amp"=>nil, "id"=>"2", "associated_id"=>"1"}
+  [4;35;1mClassSchedule Load (0.0ms)[0m   [0mSELECT * FROM `class_schedules` WHERE (`class_schedules`.`id` = 2) [0m
+  [4;36;1mCourse Load (0.0ms)[0m   [0;1mSELECT * FROM `courses` WHERE (`courses`.`id` = 1) [0m
+  [4;35;1mInstructor Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `instructors`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `instructors` WHERE (`instructors`.class_schedule_id = 2) [0m
+  [4;35;1mInstructor Load (0.0ms)[0m   [0mSELECT * FROM `instructors` WHERE (`instructors`.class_schedule_id = 2) LIMIT 4[0m
+  [4;36;1mProfessor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mProfessor Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `class_schedules` WHERE (`class_schedules`.`id` = 2) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `courses` WHERE (`courses`.`id` = 1) [0m
+  [4;36;1mRegisteredClass Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `registered_classes`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `registered_classes` WHERE (`registered_classes`.class_schedule_id = 2) [0m
+Rendered _list_record_columns (31.0ms)
+Rendered _list_actions (0.0ms)
+Rendered _list_record (31.0ms)
+Completed in 140ms (View: 109, DB: 31) | 200 OK [http://localhost/class_schedules/2/row?_method=get&amp;associated_id=1]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mClassSchedule Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `class_schedules`[0m
+  [4;35;1mCourse Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+
+
+Processing ClassSchedulesController#edit (for 127.0.0.1 at 2010-08-01 17:01:54) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"2", "associated_id"=>"1"}
+  [4;36;1mClassSchedule Load (0.0ms)[0m   [0;1mSELECT * FROM `class_schedules` WHERE (`class_schedules`.`id` = 2) [0m
+  [4;35;1mCourse Load (0.0ms)[0m   [0mSELECT * FROM `courses` WHERE (`courses`.`id` = 1) [0m
+Rendered _horizontal_subform_header (15.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (94.0ms)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `courses` [0m
+  [4;35;1mCourse Load (0.0ms)[0m   [0mSELECT * FROM `courses` [0m
+Rendered _form_association_footer (16.0ms)
+Rendered _horizontal_subform (125.0ms)
+Rendered _form_association (125.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+  [4;36;1mInstructor Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `instructors`[0m
+  [4;35;1mProfessor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mInstructor Load (0.0ms)[0m   [0;1mSELECT * FROM `instructors` WHERE (`instructors`.class_schedule_id = 2) [0m
+Rendered _horizontal_subform_header (0.0ms)
+  [4;35;1mProfessor Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;36;1mProfessor Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) [0m
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) [0m
+Rendered _form_attribute (15.0ms)
+Rendered _horizontal_subform_record (15.0ms)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `instructors` WHERE ((class_schedule_id IS NULL)) [0m
+Rendered _form_association_footer (0.0ms)
+Rendered _horizontal_subform (15.0ms)
+Rendered _form_association (15.0ms)
+  [4;35;1mRegisteredClass Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `registered_classes`[0m
+  [4;36;1mStudent Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mAcademicCredential Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;36;1mAuInfo Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `au_infos`[0m
+  [4;35;1mEmployment Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `employments`[0m
+  [4;36;1mVtInfo Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `vt_infos`[0m
+  [4;35;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+  [4;36;1mRegisteredClass Load (16.0ms)[0m   [0;1mSELECT * FROM `registered_classes` WHERE (`registered_classes`.class_schedule_id = 2) [0m
+Rendered _horizontal_subform_header (0.0ms)
+  [4;35;1mStudent Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE ( (`people`.`type` = 'Student' ) ) [0m
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `registered_classes` WHERE ((class_schedule_id IS NULL)) [0m
+Rendered _form_association_footer (0.0ms)
+Rendered _horizontal_subform (0.0ms)
+Rendered _form_association (16.0ms)
+Rendered _form (671.0ms)
+Rendered _update_form (686.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 718ms (View: 16, DB: 0) | 200 OK [http://localhost/class_schedules/2/edit?_method=get&associated_id=1&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mClassSchedule Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `class_schedules`[0m
+  [4;36;1mCourse Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+
+
+Processing ClassSchedulesController#edit_associated (for 127.0.0.1 at 2010-08-01 17:02:02) [GET]
+  Parameters: {"association"=>"registered_classes", "id"=>"2"}
+  [4;35;1mClassSchedule Load (0.0ms)[0m   [0mSELECT * FROM `class_schedules` WHERE (`class_schedules`.`id` = 2) [0m
+  [4;36;1mRegisteredClass Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `registered_classes`[0m
+Rendering edit_associated
+  [4;35;1mStudent Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAcademicCredential Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mAuInfo Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mVtInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mVtmenaAcademicProgress Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+  [4;35;1mStudent Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE ( (`people`.`type` = 'Student' ) ) [0m
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (16.0ms)
+Completed in 390ms (View: 358, DB: 48) | 200 OK [http://localhost/class_schedules/edit_associated?association=registered_classes&id=2]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mClassSchedule Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `class_schedules`[0m
+  [4;35;1mCourse Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+
+
+Processing ClassSchedulesController#update (for 127.0.0.1 at 2010-08-01 17:02:06) [PUT]
+  Parameters: {"commit"=>"Update", "authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "id"=>"2", "associated_id"=>"1", "record"=>{"instructors"=>{"1280696515310"=>{"professor"=>""}, "2"=>{"id"=>"2", "professor"=>"2"}}, "registered_classes"=>{"1280696515653"=>{"grade"=>"", "student"=>"1"}, "1280696522018"=>{"grade"=>"", "student"=>""}}, "semester"=>"Fall", "offered"=>"1", "year"=>"2999", "vtel"=>"kuhku", "course"=>{"number"=>"ikuhiuhiuh", "university"=>"iuhiuh", "topic"=>"iuhuihiuh", "id"=>"1"}}}
+  [4;36;1mClassSchedule Load (0.0ms)[0m   [0;1mSELECT * FROM `class_schedules` WHERE (`class_schedules`.`id` = 2) [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mCourse Load (0.0ms)[0m   [0;1mSELECT * FROM `courses` WHERE (`courses`.`id` = 1) [0m
+  [4;35;1mInstructor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `instructors`[0m
+  [4;36;1mInstructor Load (0.0ms)[0m   [0;1mSELECT * FROM `instructors` WHERE (`instructors`.class_schedule_id = 2) [0m
+  [4;35;1mProfessor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mProfessor Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;36;1mRegisteredClass Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `registered_classes`[0m
+  [4;35;1mStudent Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mAcademicCredential Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `academic_credentials`[0m
+  [4;35;1mAuInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `au_infos`[0m
+  [4;36;1mEmployment Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `employments`[0m
+  [4;35;1mVtInfo Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `vt_infos`[0m
+  [4;36;1mVtmenaAcademicProgress Columns (16.0ms)[0m   [0;1mSHOW FIELDS FROM `vtmena_academic_progresses`[0m
+  [4;35;1mStudent Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) AND ( (`people`.`type` = 'Student' ) ) [0m
+  [4;36;1mRegisteredClass Load (0.0ms)[0m   [0;1mSELECT * FROM `registered_classes` WHERE (`registered_classes`.class_schedule_id = 2) [0m
+  [4;35;1mRegisteredClass Create (0.0ms)[0m   [0mINSERT INTO `registered_classes` (`grade`, `updated_at`, `student_id`, `class_schedule_id`, `created_at`) VALUES(NULL, '2010-08-01 21:02:06', 1, 2, '2010-08-01 21:02:06')[0m
+  [4;36;1mSQL (47.0ms)[0m   [0;1mCOMMIT[0m
+Rendering on_update
+  [4;35;1mClassSchedule Load (0.0ms)[0m   [0mSELECT * FROM `class_schedules` WHERE (`class_schedules`.`id` = 2) [0m
+  [4;36;1mCourse Load (0.0ms)[0m   [0;1mSELECT * FROM `courses` WHERE (`courses`.`id` = 1) [0m
+Rendered _list_record_columns (16.0ms)
+Rendered _list_actions (0.0ms)
+Rendered _list_record (109.0ms)
+Rendered _messages (0.0ms)
+Completed in 499ms (View: 140, DB: 95) | 200 OK [http://localhost/class_schedules/2?associated_id=1]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mProfessor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#index (for 127.0.0.1 at 2010-08-01 17:02:18) [GET]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;35;1mProfessor Load (0.0ms)[0m   [0mSELECT `people`.* FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) ORDER BY `people`.`first_name` ASC, `people`.`last_name` ASC LIMIT 0, 15[0m
+  [4;36;1mPhone Load (0.0ms)[0m   [0;1mSELECT `phones`.* FROM `phones` WHERE (`phones`.`owner_id` = 2 and `phones`.`owner_type` = 'Person') [0m
+  [4;35;1mPhone Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `phones`[0m
+  [4;36;1mInstructor Load (0.0ms)[0m   [0;1mSELECT `instructors`.* FROM `instructors` WHERE (`instructors`.professor_id = 2) [0m
+  [4;35;1mInstructor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `instructors`[0m
+Rendering template within layouts/application
+Rendering list
+Rendered _list_header (16.0ms)
+Rendered _list_column_headings (16.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (78.0ms)
+  [4;36;1mProfessor Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;35;1mClassSchedule Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `class_schedules`[0m
+  [4;36;1mClassSchedule Load (0.0ms)[0m   [0;1mSELECT * FROM `class_schedules` WHERE (`class_schedules`.`id` = 1) [0m
+Sun Aug 01 17:02:19 -0400 2010#<NoMethodError: undefined method `to_label' for nil:NilClass> -- on the ActiveScaffold column = :instructor in ProfessorsController
+
+ActionView::TemplateError (undefined method `to_label' for nil:NilClass) on line #4 of vendor/plugins/active_scaffold/frontends/default/views/_list_record_columns.html.erb:
+1:   <%= content_tag :td, mark_record(marked_records.include?(record.id.to_s), :id => record.id), :class => 'mark_record_column' if active_scaffold_config.list.mark_records %>
+2: <% active_scaffold_config.list.columns.each do |column| %>
+3:   <% authorized = record.authorized_for?(:crud_type => :read, :column => column.name) -%>
+4:   <% column_value = authorized ? get_column_value(record, column) : active_scaffold_config.list.empty_field_text -%>
+5: 
+6:   <td class="<%= column_class(column, column_value) %>" >
+7:     <%= authorized ? render_list_column(column_value, column, record) : column_value %>
+
+    app/models/class_schedule.rb:8:in `to_label'
+    app/models/instructor.rb:7:in `to_label'
+    vendor/plugins/active_scaffold/frontends/default/views/_list_record_columns.html.erb:4
+    vendor/plugins/active_scaffold/frontends/default/views/_list_record_columns.html.erb:2
+    vendor/plugins/active_scaffold/frontends/default/views/_list_record.html.erb:10
+    vendor/plugins/active_scaffold/frontends/default/views/_list.html.erb:16
+    vendor/plugins/active_scaffold/frontends/default/views/list.html.erb:30
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (171.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mProfessor Columns (15.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#index (for 127.0.0.1 at 2010-08-01 17:03:34) [GET]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;35;1mProfessor Load (16.0ms)[0m   [0mSELECT `people`.* FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) ORDER BY `people`.`first_name` ASC, `people`.`last_name` ASC LIMIT 0, 15[0m
+  [4;36;1mPhone Load (0.0ms)[0m   [0;1mSELECT `phones`.* FROM `phones` WHERE (`phones`.`owner_id` = 2 and `phones`.`owner_type` = 'Person') [0m
+  [4;35;1mPhone Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `phones`[0m
+  [4;36;1mInstructor Load (0.0ms)[0m   [0;1mSELECT `instructors`.* FROM `instructors` WHERE (`instructors`.professor_id = 2) [0m
+  [4;35;1mInstructor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `instructors`[0m
+Rendering template within layouts/application
+Rendering list
+Rendered _list_header (15.0ms)
+Rendered _list_column_headings (31.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (0.0ms)
+  [4;36;1mProfessor Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+Rendered _list_record_columns (16.0ms)
+Rendered _list_actions (0.0ms)
+Rendered _list_record (16.0ms)
+Rendered _list_pagination (15.0ms)
+Rendered _list (78.0ms)
+Completed in 203ms (View: 187, DB: 46) | 200 OK [http://localhost/professors]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mProfessor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (15.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#edit (for 127.0.0.1 at 2010-08-01 17:03:45) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"2"}
+  [4;35;1mProfessor Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+  [4;36;1mPhone Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `phones`[0m
+  [4;35;1mPhone Load (0.0ms)[0m   [0mSELECT * FROM `phones` WHERE (`phones`.owner_id = 2 AND `phones`.owner_type = 'Person') [0m
+Rendered _horizontal_subform_header (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `phones` WHERE ((owner_id IS NULL)) [0m
+Rendered _form_association_footer (0.0ms)
+Rendered _horizontal_subform (141.0ms)
+Rendered _form_association (141.0ms)
+  [4;35;1mInstructor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `instructors`[0m
+  [4;36;1mClassSchedule Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `class_schedules`[0m
+  [4;35;1mCourse Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+  [4;36;1mInstructor Load (0.0ms)[0m   [0;1mSELECT * FROM `instructors` WHERE (`instructors`.professor_id = 2) [0m
+Rendered _horizontal_subform_header (78.0ms)
+  [4;35;1mClassSchedule Load (0.0ms)[0m   [0mSELECT * FROM `class_schedules` WHERE (`class_schedules`.`id` = 1) [0m
+  [4;36;1mClassSchedule Load (0.0ms)[0m   [0;1mSELECT * FROM `class_schedules` [0m
+Sun Aug 01 17:03:45 -0400 2010#<NoMethodError: undefined method `to_label' for nil:NilClass> -- on the ActiveScaffold column = :class_schedule in ProfessorsController
+
+ActionView::TemplateError (undefined method `to_label' for nil:NilClass) on line #7 of vendor/plugins/active_scaffold/frontends/default/views/_form_attribute.html.erb:
+4:     <label for="<%= active_scaffold_input_options(column, scope)[:id] %>"><%= column.label %></label>
+5:   </dt>
+6:   <dd>
+7:     <%= active_scaffold_input_for column, scope %>
+8:     <% if column.options.is_a?(Hash) && column.options[:update_column] -%>
+9:       <%= loading_indicator_tag(:action => :render_field, :id => params[:id]) %>
+10:     <% end -%>
+
+    app/models/class_schedule.rb:8:in `to_label'
+    vendor/plugins/active_scaffold/frontends/default/views/_form_attribute.html.erb:7
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform_record.html.erb:16
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform_record.html.erb:7
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:15
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:6:in `each_index'
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:6
+    vendor/plugins/active_scaffold/frontends/default/views/_form_association.html.erb:13
+    vendor/plugins/active_scaffold/frontends/default/views/_form.html.erb:10
+    vendor/plugins/active_scaffold/frontends/default/views/_form.html.erb:2
+    vendor/plugins/active_scaffold/frontends/default/views/_update_form.html.erb:45
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (218.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mProfessor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#show (for 127.0.0.1 at 2010-08-01 17:04:22) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"2"}
+  [4;36;1mProfessor Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;35;1mPhone Columns (15.0ms)[0m   [0mSHOW FIELDS FROM `phones`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `phones` WHERE (`phones`.owner_id = 2 AND `phones`.owner_type = 'Person') [0m
+  [4;35;1mPhone Load (0.0ms)[0m   [0mSELECT * FROM `phones` WHERE (`phones`.owner_id = 2 AND `phones`.owner_type = 'Person') LIMIT 4[0m
+  [4;36;1mInstructor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `instructors`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `instructors` WHERE (`instructors`.professor_id = 2) [0m
+  [4;36;1mInstructor Load (0.0ms)[0m   [0;1mSELECT * FROM `instructors` WHERE (`instructors`.professor_id = 2) LIMIT 4[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+Rendered _show_columns (109.0ms)
+Rendered _show (125.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 140ms (View: 0, DB: 0) | 200 OK [http://localhost/professors/2?_method=get&adapter=_list_inline_adapter]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mProfessor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#row (for 127.0.0.1 at 2010-08-01 17:04:31) [GET]
+  Parameters: {"id"=>"2"}
+  [4;36;1mProfessor Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;35;1mPhone Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `phones`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `phones` WHERE (`phones`.owner_id = 2 AND `phones`.owner_type = 'Person') [0m
+  [4;35;1mPhone Load (0.0ms)[0m   [0mSELECT * FROM `phones` WHERE (`phones`.owner_id = 2 AND `phones`.owner_type = 'Person') LIMIT 4[0m
+  [4;36;1mInstructor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `instructors`[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `instructors` WHERE (`instructors`.professor_id = 2) [0m
+  [4;36;1mInstructor Load (0.0ms)[0m   [0;1mSELECT * FROM `instructors` WHERE (`instructors`.professor_id = 2) LIMIT 4[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+Rendered _list_record_columns (16.0ms)
+Rendered _list_actions (15.0ms)
+Rendered _list_record (47.0ms)
+Completed in 62ms (View: 62, DB: 0) | 200 OK [http://localhost/professors/2/row?_method=get]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mProfessor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#edit (for 127.0.0.1 at 2010-08-01 17:04:34) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter", "id"=>"2"}
+  [4;36;1mProfessor Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+  [4;35;1mPhone Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `phones`[0m
+  [4;36;1mPhone Load (0.0ms)[0m   [0;1mSELECT * FROM `phones` WHERE (`phones`.owner_id = 2 AND `phones`.owner_type = 'Person') [0m
+Rendered _horizontal_subform_header (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (15.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `phones` WHERE ((owner_id IS NULL)) [0m
+Rendered _form_association_footer (16.0ms)
+Rendered _horizontal_subform (31.0ms)
+Rendered _form_association (47.0ms)
+  [4;36;1mInstructor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `instructors`[0m
+  [4;35;1mClassSchedule Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `class_schedules`[0m
+  [4;36;1mCourse Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+  [4;35;1mInstructor Load (0.0ms)[0m   [0mSELECT * FROM `instructors` WHERE (`instructors`.professor_id = 2) [0m
+Rendered _horizontal_subform_header (0.0ms)
+  [4;36;1mClassSchedule Load (0.0ms)[0m   [0;1mSELECT * FROM `class_schedules` WHERE (`class_schedules`.`id` = 1) [0m
+  [4;35;1mClassSchedule Load (0.0ms)[0m   [0mSELECT * FROM `class_schedules` [0m
+Sun Aug 01 17:04:34 -0400 2010#<NoMethodError: undefined method `to_label' for nil:NilClass> -- on the ActiveScaffold column = :class_schedule in ProfessorsController
+
+ActionView::TemplateError (undefined method `to_label' for nil:NilClass) on line #7 of vendor/plugins/active_scaffold/frontends/default/views/_form_attribute.html.erb:
+4:     <label for="<%= active_scaffold_input_options(column, scope)[:id] %>"><%= column.label %></label>
+5:   </dt>
+6:   <dd>
+7:     <%= active_scaffold_input_for column, scope %>
+8:     <% if column.options.is_a?(Hash) && column.options[:update_column] -%>
+9:       <%= loading_indicator_tag(:action => :render_field, :id => params[:id]) %>
+10:     <% end -%>
+
+    app/models/class_schedule.rb:8:in `to_label'
+    vendor/plugins/active_scaffold/frontends/default/views/_form_attribute.html.erb:7
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform_record.html.erb:16
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform_record.html.erb:7
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:15
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:6:in `each_index'
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:6
+    vendor/plugins/active_scaffold/frontends/default/views/_form_association.html.erb:13
+    vendor/plugins/active_scaffold/frontends/default/views/_form.html.erb:10
+    vendor/plugins/active_scaffold/frontends/default/views/_form.html.erb:2
+    vendor/plugins/active_scaffold/frontends/default/views/_update_form.html.erb:45
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (203.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mProfessor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#destroy (for 127.0.0.1 at 2010-08-01 17:04:39) [DELETE]
+  Parameters: {"authenticity_token"=>"9VGrwEPKKcAGJOktuf+MT1H+PexwJiljXjeY2IM+PL8=", "id"=>"2"}
+  [4;35;1mProfessor Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mProfessor Destroy (0.0ms)[0m   [0mDELETE FROM `people` WHERE `id` = 2[0m
+  [4;36;1mSQL (31.0ms)[0m   [0;1mCOMMIT[0m
+Rendering destroy
+Rendered _messages (0.0ms)
+Completed in 63ms (View: 16, DB: 31) | 200 OK [http://localhost/professors/2?_method=delete&authenticity_token=9VGrwEPKKcAGJOktuf%2BMT1H%2BPexwJiljXjeY2IM%2BPL8%3D]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mProfessor Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#index (for 127.0.0.1 at 2010-08-01 17:04:39) [GET]
+  Parameters: {"page"=>"1"}
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;35;1mProfessor Load (0.0ms)[0m   [0mSELECT `people`.* FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) ORDER BY `people`.`first_name` ASC, `people`.`last_name` ASC LIMIT 0, 15[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT `people`.* FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) ORDER BY `people`.`first_name` ASC, `people`.`last_name` ASC LIMIT 0, 15[0m
+Rendering list
+Rendered _list_column_headings (31.0ms)
+Rendered _messages (94.0ms)
+Rendered _list_messages (94.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (125.0ms)
+Completed in 141ms (View: 141, DB: 16) | 200 OK [http://localhost/professors?page=1]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mProfessor Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#new (for 127.0.0.1 at 2010-08-01 17:04:42) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter"}
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (16.0ms)
+Rendered _form_attribute (0.0ms)
+  [4;36;1mPhone Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `phones`[0m
+Rendered _horizontal_subform_header (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `phones` WHERE ((owner_id IS NULL)) [0m
+Rendered _form_association_footer (15.0ms)
+Rendered _horizontal_subform (124.0ms)
+Rendered _form_association (124.0ms)
+  [4;36;1mInstructor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `instructors`[0m
+  [4;35;1mClassSchedule Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `class_schedules`[0m
+  [4;36;1mCourse Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+Rendered _horizontal_subform_header (0.0ms)
+  [4;35;1mClassSchedule Load (0.0ms)[0m   [0mSELECT * FROM `class_schedules` [0m
+Sun Aug 01 17:04:42 -0400 2010#<NoMethodError: undefined method `to_label' for nil:NilClass> -- on the ActiveScaffold column = :class_schedule in ProfessorsController
+
+ActionView::TemplateError (undefined method `to_label' for nil:NilClass) on line #7 of vendor/plugins/active_scaffold/frontends/default/views/_form_attribute.html.erb:
+4:     <label for="<%= active_scaffold_input_options(column, scope)[:id] %>"><%= column.label %></label>
+5:   </dt>
+6:   <dd>
+7:     <%= active_scaffold_input_for column, scope %>
+8:     <% if column.options.is_a?(Hash) && column.options[:update_column] -%>
+9:       <%= loading_indicator_tag(:action => :render_field, :id => params[:id]) %>
+10:     <% end -%>
+
+    app/models/class_schedule.rb:8:in `to_label'
+    vendor/plugins/active_scaffold/frontends/default/views/_form_attribute.html.erb:7
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform_record.html.erb:16
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform_record.html.erb:7
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:15
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:6:in `each_index'
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:6
+    vendor/plugins/active_scaffold/frontends/default/views/_form_association.html.erb:13
+    vendor/plugins/active_scaffold/frontends/default/views/_form.html.erb:10
+    vendor/plugins/active_scaffold/frontends/default/views/_form.html.erb:2
+    vendor/plugins/active_scaffold/frontends/default/views/_create_form.html.erb:41
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (187.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mProfessor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#new (for 127.0.0.1 at 2010-08-01 17:04:46) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter"}
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+  [4;35;1mPhone Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `phones`[0m
+Rendered _horizontal_subform_header (16.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `phones` WHERE ((owner_id IS NULL)) [0m
+Rendered _form_association_footer (15.0ms)
+Rendered _horizontal_subform (31.0ms)
+Rendered _form_association (31.0ms)
+  [4;35;1mInstructor Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `instructors`[0m
+  [4;36;1mClassSchedule Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `class_schedules`[0m
+  [4;35;1mCourse Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+Rendered _horizontal_subform_header (0.0ms)
+  [4;36;1mClassSchedule Load (0.0ms)[0m   [0;1mSELECT * FROM `class_schedules` [0m
+Sun Aug 01 17:04:46 -0400 2010#<NoMethodError: undefined method `to_label' for nil:NilClass> -- on the ActiveScaffold column = :class_schedule in ProfessorsController
+
+ActionView::TemplateError (undefined method `to_label' for nil:NilClass) on line #7 of vendor/plugins/active_scaffold/frontends/default/views/_form_attribute.html.erb:
+4:     <label for="<%= active_scaffold_input_options(column, scope)[:id] %>"><%= column.label %></label>
+5:   </dt>
+6:   <dd>
+7:     <%= active_scaffold_input_for column, scope %>
+8:     <% if column.options.is_a?(Hash) && column.options[:update_column] -%>
+9:       <%= loading_indicator_tag(:action => :render_field, :id => params[:id]) %>
+10:     <% end -%>
+
+    app/models/class_schedule.rb:8:in `to_label'
+    vendor/plugins/active_scaffold/frontends/default/views/_form_attribute.html.erb:7
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform_record.html.erb:16
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform_record.html.erb:7
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:15
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:6:in `each_index'
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:6
+    vendor/plugins/active_scaffold/frontends/default/views/_form_association.html.erb:13
+    vendor/plugins/active_scaffold/frontends/default/views/_form.html.erb:10
+    vendor/plugins/active_scaffold/frontends/default/views/_form.html.erb:2
+    vendor/plugins/active_scaffold/frontends/default/views/_create_form.html.erb:41
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (202.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mProfessor Columns (15.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mUsResidency Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `us_residencies`[0m
+  [4;35;1mPerson Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#new (for 127.0.0.1 at 2010-08-01 17:05:02) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter"}
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+  [4;36;1mPhone Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `phones`[0m
+Rendered _horizontal_subform_header (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `phones` WHERE ((owner_id IS NULL)) [0m
+Rendered _form_association_footer (0.0ms)
+Rendered _horizontal_subform (109.0ms)
+Rendered _form_association (125.0ms)
+  [4;36;1mInstructor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `instructors`[0m
+  [4;35;1mClassSchedule Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `class_schedules`[0m
+  [4;36;1mCourse Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `courses`[0m
+Rendered _horizontal_subform_header (0.0ms)
+  [4;35;1mClassSchedule Load (0.0ms)[0m   [0mSELECT * FROM `class_schedules` [0m
+Sun Aug 01 17:05:02 -0400 2010#<NoMethodError: undefined method `to_label' for nil:NilClass> -- on the ActiveScaffold column = :class_schedule in ProfessorsController
+
+ActionView::TemplateError (undefined method `to_label' for nil:NilClass) on line #7 of vendor/plugins/active_scaffold/frontends/default/views/_form_attribute.html.erb:
+4:     <label for="<%= active_scaffold_input_options(column, scope)[:id] %>"><%= column.label %></label>
+5:   </dt>
+6:   <dd>
+7:     <%= active_scaffold_input_for column, scope %>
+8:     <% if column.options.is_a?(Hash) && column.options[:update_column] -%>
+9:       <%= loading_indicator_tag(:action => :render_field, :id => params[:id]) %>
+10:     <% end -%>
+
+    app/models/class_schedule.rb:8:in `to_label'
+    vendor/plugins/active_scaffold/frontends/default/views/_form_attribute.html.erb:7
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform_record.html.erb:16
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform_record.html.erb:7
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:15
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:6:in `each_index'
+    vendor/plugins/active_scaffold/frontends/default/views/_horizontal_subform.html.erb:6
+    vendor/plugins/active_scaffold/frontends/default/views/_form_association.html.erb:13
+    vendor/plugins/active_scaffold/frontends/default/views/_form.html.erb:10
+    vendor/plugins/active_scaffold/frontends/default/views/_form.html.erb:2
+    vendor/plugins/active_scaffold/frontends/default/views/_create_form.html.erb:41
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (187.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mProfessor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#index (for 127.0.0.1 at 2010-08-01 17:05:28) [GET]
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) [0m
+  [4;36;1mProfessor Load (0.0ms)[0m   [0;1mSELECT `people`.* FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) ORDER BY `people`.`first_name` ASC, `people`.`last_name` ASC LIMIT 0, 15[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT `people`.* FROM `people` WHERE ( (`people`.`type` = 'Professor' ) ) ORDER BY `people`.`first_name` ASC, `people`.`last_name` ASC LIMIT 0, 15[0m
+Rendering template within layouts/application
+Rendering list
+Rendered _list_header (16.0ms)
+Rendered _list_column_headings (31.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (0.0ms)
+Rendered _list_pagination (0.0ms)
+Rendered _list (125.0ms)
+Completed in 156ms (View: 156, DB: 0) | 200 OK [http://localhost/professors]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mProfessor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mUsResidency Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `us_residencies`[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+
+
+Processing ProfessorsController#new (for 127.0.0.1 at 2010-08-01 17:05:32) [GET]
+  Parameters: {"adapter"=>"_list_inline_adapter"}
+Rendered _form_attribute (15.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _form_attribute (16.0ms)
+  [4;35;1mPhone Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `phones`[0m
+Rendered _horizontal_subform_header (0.0ms)
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (16.0ms)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `phones` WHERE ((owner_id IS NULL)) [0m
+Rendered _form_association_footer (0.0ms)
+Rendered _horizontal_subform (32.0ms)
+Rendered _form_association (32.0ms)
+  [4;35;1mInstructor Columns (15.0ms)[0m   [0mSHOW FIELDS FROM `instructors`[0m
+  [4;36;1mClassSchedule Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `class_schedules`[0m
+  [4;35;1mCourse Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+Rendered _horizontal_subform_header (0.0ms)
+  [4;36;1mClassSchedule Load (0.0ms)[0m   [0;1mSELECT * FROM `class_schedules` [0m
+Rendered _form_attribute (0.0ms)
+Rendered _horizontal_subform_record (0.0ms)
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM `instructors` WHERE ((professor_id IS NULL)) [0m
+Rendered _form_association_footer (0.0ms)
+Rendered _horizontal_subform (0.0ms)
+Rendered _form_association (0.0ms)
+Rendered _form (234.0ms)
+Rendered _create_form (328.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_inline_adapter (0.0ms)
+Completed in 359ms (View: 15, DB: 0) | 200 OK [http://localhost/professors/new?_method=get&adapter=_list_inline_adapter]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mClassSchedule Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `class_schedules`[0m
+  [4;35;1mCourse Columns (0.0ms)[0m   [0mSHOW FIELDS FROM `courses`[0m
+
+
+Processing ClassSchedulesController#index (for 127.0.0.1 at 2010-08-01 17:05:54) [GET]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM `class_schedules` [0m
+  [4;35;1mClassSchedule Load (0.0ms)[0m   [0mSELECT `class_schedules`.* FROM `class_schedules` ORDER BY `class_schedules`.`year` ASC, `class_schedules`.`semester` ASC LIMIT 0, 15[0m
+  [4;36;1mCourse Load (0.0ms)[0m   [0;1mSELECT * FROM `courses` WHERE (`courses`.`id` = 1) [0m
+  [4;35;1mInstructor Load (0.0ms)[0m   [0mSELECT `instructors`.* FROM `instructors` WHERE (`instructors`.class_schedule_id IN (1,2)) [0m
+  [4;36;1mInstructor Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `instructors`[0m
+  [4;35;1mRegisteredClass Load (0.0ms)[0m   [0mSELECT `registered_classes`.* FROM `registered_classes` WHERE (`registered_classes`.class_schedule_id IN (1,2)) [0m
+  [4;36;1mRegisteredClass Columns (0.0ms)[0m   [0;1mSHOW FIELDS FROM `registered_classes`[0m
+Rendering template within layouts/application
+Rendering list
+Rendered _list_header (0.0ms)
+Rendered _list_column_headings (16.0ms)
+Rendered _messages (0.0ms)
+Rendered _list_messages (0.0ms)
+  [4;35;1mProfessor Columns (16.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mProfessor Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 2) AND ( (`people`.`type` = 'Professor' ) ) [0m
+Sun Aug 01 17:05:54 -0400 2010#<NoMethodError: undefined method `to_label' for nil:NilClass> -- on the ActiveScaffold column = :instructors in ClassSchedulesController
+
+ActionView::TemplateError (undefined method `to_label' for nil:NilClass) on line #4 of vendor/plugins/active_scaffold/frontends/default/views/_list_record_columns.html.erb:
+1:   <%= content_tag :td, mark_record(marked_records.include?(record.id.to_s), :id => record.id), :class => 'mark_record_column' if active_scaffold_config.list.mark_records %>
+2: <% active_scaffold_config.list.columns.each do |column| %>
+3:   <% authorized = record.authorized_for?(:crud_type => :read, :column => column.name) -%>
+4:   <% column_value = authorized ? get_column_value(record, column) : active_scaffold_config.list.empty_field_text -%>
+5: 
+6:   <td class="<%= column_class(column, column_value) %>" >
+7:     <%= authorized ? render_list_column(column_value, column, record) : column_value %>
+
+    app/models/instructor.rb:6:in `to_label'
+    vendor/plugins/active_scaffold/frontends/default/views/_list_record_columns.html.erb:4
+    vendor/plugins/active_scaffold/frontends/default/views/_list_record_columns.html.erb:2
+    vendor/plugins/active_scaffold/frontends/default/views/_list_record.html.erb:10
+    vendor/plugins/active_scaffold/frontends/default/views/_list.html.erb:16
+    vendor/plugins/active_scaffold/frontends/default/views/list.html.erb:30
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    C:/InstantRails/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (203.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
