@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  student_id: 1
+  student_pid: MyString
+  student_id_number: MyString
+  department: MyString
+  degree: MyString
+  degree_program: MyString
+  area: MyString
+  semester_admitted: MyString
+  year: 1
+
+two:
+  student_id: 1
+  student_pid: MyString
+  student_id_number: MyString
+  department: MyString
+  degree: MyString
+  degree_program: MyString
+  area: MyString
+  semester_admitted: MyString
+  year: 1

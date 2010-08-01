@@ -1,0 +1,2 @@
+module VtmenaAcademicProgressesHelper
+end

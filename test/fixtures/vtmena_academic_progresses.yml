@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  student_id: 1
+  vt_advisor_id: 
+  au_advisor_id: 1
+  research_topic: MyString
+  vt_gpa: 9.99
+  vt_course_credits: 1
+  vt_research_credits: 1
+  au_gpa: 9.99
+  au_course_credits: 1
+  au_research_credits: 1
+  total_course_credits: 1
+  total_research_credits: 1
+
+two:
+  student_id: 1
+  vt_advisor_id: 
+  au_advisor_id: 1
+  research_topic: MyString
+  vt_gpa: 9.99
+  vt_course_credits: 1
+  vt_research_credits: 1
+  au_gpa: 9.99
+  au_course_credits: 1
+  au_research_credits: 1
+  total_course_credits: 1
+  total_research_credits: 1

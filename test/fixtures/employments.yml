@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  student_id: 1
+  present_employer: MyString
+  position: MyString
+  government: false
+  mission: false
+
+two:
+  student_id: 1
+  present_employer: MyString
+  position: MyString
+  government: false
+  mission: false

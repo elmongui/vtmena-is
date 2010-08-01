@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  graduation_semester: MyString
+  graduation_year: 1
+
+two:
+  graduation_semester: MyString
+  graduation_year: 1

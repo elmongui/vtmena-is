@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  student_id: 1
+  professor_id: 1
+  number: MyString
+  topic: MyString
+  grade: MyString
+  semester: MyString
+  vtel: MyString
+  vt_au: MyString
+
+two:
+  student_id: 1
+  professor_id: 1
+  number: MyString
+  topic: MyString
+  grade: MyString
+  semester: MyString
+  vtel: MyString
+  vt_au: MyString

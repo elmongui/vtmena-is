@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  student_id: 
+  date_started: 2010-07-26
+  date_ended: 2010-07-26
+  phones: 
+  address_1: MyString
+  address_2: MyString
+  city: MyString
+  state: MyString
+  zipcode: MyString
+
+two:
+  student_id: 
+  date_started: 2010-07-26
+  date_ended: 2010-07-26
+  phones: 
+  address_1: MyString
+  address_2: MyString
+  city: MyString
+  state: MyString
+  zipcode: MyString

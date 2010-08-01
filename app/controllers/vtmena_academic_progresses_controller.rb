@@ -1,0 +1,3 @@
+class VtmenaAcademicProgressesController < ApplicationController
+	active_scaffold :vtmena_academic_progress
+end
