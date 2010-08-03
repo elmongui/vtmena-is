@@ -1,3 +1,4 @@
+---
 chdir: /usr/local/vtmena-is/current
 port: "9000"
 log: log/thin.log
