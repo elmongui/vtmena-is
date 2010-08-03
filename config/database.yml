@@ -44,5 +44,5 @@ production:
   database: vtmena_production
   pool: 5
   username: vtmena-is
-  password: 
+  password: VtM3n@_!$
   host: localhost
