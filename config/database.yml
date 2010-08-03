@@ -43,6 +43,6 @@ production:
   reconnect: false
   database: vtmena_production
   pool: 5
-  username: root
+  username: vtmena-is
   password: 
   host: localhost
