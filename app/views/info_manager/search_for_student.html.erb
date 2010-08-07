@@ -1,0 +1,55 @@
+<h1>Students</h1>
+
+<table>
+	<tr>
+		<th>Query:</th>
+		<td align="right">Student ID:</td>
+		<td><%=h params[:student_id_number] %></td>
+	</tr>
+	<tr>
+		<th />
+		<td align="right">Student PID:</td>
+		<td><%=h params[:student_pid] %></td>
+	</tr>
+	<tr>
+		<th />
+		<td align="right">Last name:</td>
+		<td><%=h params[:last_name] %></td>
+	</tr>
+</table>
+
+
+
+<table border="1">
+	<tr>
+		<th>Student ID</th>
+		<th>Student PID</th>
+		<th>Name</th>
+		<th>Department</th>
+	</tr>
+	<% for student in @students %>
+		<tr>
+			<td><%=h student.vt_info.nil? ? "" : student.vt_info.student_id_number %></td>
+			<td>
+				<a href="mailto:<%=h student.email%>">
+					<%=h student.vt_info.nil? ? "" : student.vt_info.student_pid %>
+				</a>
+			</td>
+			<td>
+				<%= link_to student.name, student %>
+			</td>
+			<td><%=h student.vt_info.nil? ? "" : student.vt_info.department %></td>
+		</tr>
+	<% end %>
+	<tr>
+		<td colspan="4"></td>
+	</tr>
+	<tr>
+		<td colspan="4" align="right"><%=h @students.length%> student<%=h @students.length>1 ? "s" : "" %> found!</td>
+	</tr>
+</table>
+
+<hr />
+<%= link_to 'Back', info_manager_path %>
+
+

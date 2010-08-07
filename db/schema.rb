@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100729164538) do
+ActiveRecord::Schema.define(:version => 20100804050823) do
 
   create_table "academic_credentials", :force => true do |t|
     t.integer  "student_id"
@@ -157,6 +157,14 @@ ActiveRecord::Schema.define(:version => 20100729164538) do
     t.datetime "updated_at"
   end
 
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "hashed_password"
+    t.string   "salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "vt_infos", :force => true do |t|
     t.integer  "student_id"
     t.string   "student_pid"
@@ -182,6 +190,11 @@ ActiveRecord::Schema.define(:version => 20100729164538) do
     t.integer  "au_research_credits"
     t.integer  "total_course_credits"
     t.integer  "total_research_credits"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vtmena_info_sies", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end

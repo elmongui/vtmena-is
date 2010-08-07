@@ -2,12 +2,37 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  helper :all # include all helpers, all the time
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
+	helper :all # include all helpers, all the time
+	protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
-  # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
-  ActiveScaffold.set_defaults do |config| 
-    config.ignore_columns.add [:created_at, :updated_at, :lock_version]
-  end
+	# Scrub sensitive parameters from your log
+	# filter_parameter_logging :password
+	ActiveScaffold.set_defaults do |config| 
+		config.ignore_columns.add [:created_at, :updated_at, :lock_version]
+	end
+
+	
+	def flash_redirect(msg, *params)
+		flash[:notice] = msg
+		redirect_to(*params)
+	end
+
+
+	# redirect somewhere that will eventually return back to here
+	def redirect_away(*params)
+		session[:original_uri] = request.request_uri
+		redirect_to(*params)
+	end
+
+	
+	# returns the person to either the original url from a redirect_away or to a default url
+	def redirect_back(*params)
+		uri = session[:original_uri]
+		session[:original_uri] = nil
+		if uri
+			redirect_to uri
+		else
+			redirect_to(*params)
+		end
+	end
 end

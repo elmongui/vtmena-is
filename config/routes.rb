@@ -1,39 +1,42 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :advisorships, :active_scaffold => true
+	map.resource :info_manager, :controller=>:info_manager
+	
+	map.resources :users
+	
+	map.resources :advisorships, :active_scaffold => true
 
-  map.resources :achievements, :active_scaffold => true
+	map.resources :achievements, :active_scaffold => true
 
-  map.resources :vtmena_academic_progresses, :active_scaffold => true
+	map.resources :vtmena_academic_progresses, :active_scaffold => true
 
-  map.resources :registered_classes, :active_scaffold => true
+	map.resources :registered_classes, :active_scaffold => true
 
-  map.resources :instructors, :active_scaffold => true
+	map.resources :instructors, :active_scaffold => true
 
-  map.resources :class_schedules, :active_scaffold => true
+	map.resources :class_schedules, :active_scaffold => true
 
-  map.resources :courses, :active_scaffold => true
+	map.resources :courses, :active_scaffold => true
 
-  map.resources :academic_milestones, :active_scaffold => true
+	map.resources :academic_milestones, :active_scaffold => true
 
-  map.resources :au_infos, :active_scaffold => true
+	map.resources :au_infos, :active_scaffold => true
 
-  map.resources :vt_infos, :active_scaffold => true
+	map.resources :vt_infos, :active_scaffold => true
 
-  map.resources :employments, :active_scaffold => true
+	map.resources :employments, :active_scaffold => true
 
-  map.resources :academic_credentials, :active_scaffold => true
+	map.resources :academic_credentials, :active_scaffold => true
 
-  map.resources :us_residencies, :active_scaffold => true
+	map.resources :us_residencies, :active_scaffold => true
 
-  map.resources :phones, :active_scaffold => true
+	map.resources :phones, :active_scaffold => true
 
-  map.resources :students, :active_scaffold => true
+	map.resources :students, :active_scaffold => true
 
-  map.resources :professors, :active_scaffold => true
+	map.resources :professors, :active_scaffold => true
 
-  map.resources :people, :active_scaffold => true
+	map.resources :people, :active_scaffold => true
 
-  
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

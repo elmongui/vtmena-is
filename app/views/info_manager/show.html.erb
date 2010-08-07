@@ -1,0 +1,44 @@
+<div class='vtmena-form'>
+	<% form_tag '/info_manager/search_for_student' do %>
+		<fieldset>
+			<legend>Student's Info</legend>
+			<div>
+				<label for='student_id_number'>Student ID:</label>
+				<%= text_field_tag :student_id_number, params[:student_id_number] %>
+			</div>
+			<div>
+				<label for='student_pid'>Student PID:</label>
+				<%= text_field_tag :student_pid, params[:student_pid] %>
+			</div>
+			<div>
+				<label for='last_name'>Last name:</label>
+				<%= text_field_tag :last_name, params[:last_name] %>
+			</div>
+			<div>
+				<%= submit_tag 'Search' %>
+			</div>
+		</fieldset>
+	<% end %>
+
+	
+	<% form_tag '/info_manager/search_for_course' do %>
+		<fieldset>
+			<legend>Courses</legend>
+			<div>
+				<label for='university'>University:</label>
+				<%= select_tag :university, '<option></option><option>AU</option><option>VT</option>' %>
+			</div>
+			<div>
+				<label for='semester'>Semester:</label>
+				<%= select_tag :semester, "<option></option><option>Fall</option><option>Spring</option><option>Summer</option><option>Summer I</option><option>Summer II</option>" %>
+			</div>
+			<div>
+				<label for='year'>Year:</label>
+				<%= select_tag :year, "<option></option><option>2008</option><option>2009</option><option>2010</option><option>2011</option><option>2012</option><option>2013</option>" %>
+			</div>
+			<div>
+				<%= submit_tag 'Search' %>
+			</div>
+		</fieldset>
+	<% end %>	
+</div>
