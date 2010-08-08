@@ -1,3 +1,8 @@
+<div class='vtmena-form' align="right">
+	<%= link_to "Logout", :action=>"logout" %>
+</div>
+
+
 <div class='vtmena-form'>
 	<% form_tag '/info_manager/search_for_student' do %>
 		<fieldset>
@@ -19,8 +24,10 @@
 			</div>
 		</fieldset>
 	<% end %>
+</div>
 
 	
+<div class='vtmena-form'>
 	<% form_tag '/info_manager/search_for_course' do %>
 		<fieldset>
 			<legend>Courses</legend>
@@ -41,4 +48,16 @@
 			</div>
 		</fieldset>
 	<% end %>	
+</div>
+
+	
+<div class='vtmena-form' style='display:<%= session[:user].role=="admin" ? "block" : "none" %>'>
+	<% form_tag '/info_manager/manage_users' do %>
+		<fieldset>
+			<legend>Manage Users</legend>
+			<div>
+				<%= link_to "List users", :action=>"manage_users" %>
+			</div>
+		</fieldset>
+	<% end %>
 </div>

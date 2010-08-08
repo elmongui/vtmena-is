@@ -1,4 +1,4 @@
-<h1>Students</h1>
+<h1>Courses</h1>
 
 <table>
 	<tr>
@@ -28,18 +28,20 @@
 		<th>Semester</th>
 		<th>Year</th>
 		<th>VTel</th>
-		<th>Offered</th>
+		<th>Offered?</th>
 	</tr>
 	<% for course in @courses %>
-		<tr>
-			<td><%=h course.university %></td>
-			<td><%=h course.number %></td>
-			<td><%=h course.topic %></td>
-			<td><%=h course.class_schedules.nil? ? "" : course.class_schedules.semester %></td>
-			<td><%=h course.class_schedules.nil? ? "" : course.class_schedules.year %></td>
-			<td><%=h course.class_schedules.nil? ? "" : course.class_schedules.vtel %></td>
-			<td><%=h course.class_schedules.nil? ? "" : course.class_schedules.offered %></td>
-		</tr>
+		<% for class_schedule in course.class_schedules %>
+			<tr>
+				<td><%=h course.university %></td>
+				<td><%=h course.number %></td>
+				<td><%=h course.topic %></td>
+				<td><%=h class_schedule.nil? ? "" : class_schedule.semester %></td>
+				<td><%=h class_schedule.nil? ? "" : class_schedule.year %></td>
+				<td><%=h class_schedule.nil? ? "" : class_schedule.vtel %></td>
+				<td><%=h class_schedule.nil? ? "" : class_schedule.offered %></td>
+			</tr>
+		<% end %>
 	<% end %>
 	<tr>
 		<td colspan="7"></td>

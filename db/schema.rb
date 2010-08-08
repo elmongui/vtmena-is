@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100804050823) do
+ActiveRecord::Schema.define(:version => 20100808072202) do
 
   create_table "academic_credentials", :force => true do |t|
     t.integer  "student_id"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(:version => 20100804050823) do
     t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role"
   end
 
   create_table "vt_infos", :force => true do |t|

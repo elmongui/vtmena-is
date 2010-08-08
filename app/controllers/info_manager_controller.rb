@@ -5,9 +5,8 @@ class InfoManagerController < ApplicationController
 		if request.post?
 			user = User.authenticate(params[:name], params[:password])
 			if user
-				session[:auth] = true
-				session[:user_id] = user.id
-				redirect_back(:action => 'index')
+				session[:user] = user
+				redirect_back(:action => 'show')
 			else
 				flash.now[:notice] = "Invalid user/password combination"
 			end
@@ -15,62 +14,70 @@ class InfoManagerController < ApplicationController
 	end
 
 	def logout
-		session[:user_id] = nil
-		redirect_to(:action => "login") if session[:user_id].nil?
+		session[:user] = nil
+		flash_redirect("User successfully logged out", :action => "login") 
 	end
 
-	def index
-	end
 	
 	def search_for_student
-		flash_redirect("Invalid search parameters", :action => "index") if params[:last_name].nil?
-
-		@students = Student.all( :include => [:vt_info],
-								:conditions => ["vt_infos.student_id_number = ? OR \
-												vt_infos.student_pid = ? OR \
-												last_name = ?", 
-												params[:student_id_number].strip, 
-												params[:student_pid].strip,
-												params[:last_name].strip
-												]
-								)
-		if @students.length == 0
-			flash_redirect("No student found!", :action => "index")
+		if params[:last_name].nil?
+			flash_redirect("Invalid search parameters", :action => "show") 
 		else
-			respond_to do |format|
-				format.html # search_for_student.html.erb
-				format.xml  { render :xml => @students }
+			@students = Student.all(:include => [:vt_info],
+									:conditions => ["vt_infos.student_id_number = ? OR \
+													vt_infos.student_pid = ? OR \
+													last_name = ?", 
+													params[:student_id_number].strip, 
+													params[:student_pid].strip,
+													params[:last_name].strip
+													]
+									)
+			if @students.length == 0
+				flash_redirect("No student found!", :action => "show")
+			else
+				respond_to do |format|
+					format.html # search_for_student.html.erb
+					format.xml  { render :xml => @students }
+				end
 			end
 		end
 	end
 
 	
 	def search_for_course
-		flash_redirect("Invalid search parameters", :action => "index") if params[:university].nil?
-
-		@courses = Course.all( :include => [:class_schedules],
-								:conditions => ["class_schedules.semester = ? OR \
-												class_schedules.year = ? OR \
-												university = ?", 
-												params[:semester], 
-												params[:year],
-												params[:university]
-												]
-								)
-		if @courses.length == 0
-			flash_redirect("No course found!", :action => "index")
+		if params[:university].nil?
+			flash_redirect("Invalid search parameters", :action => "show") 
 		else
-			respond_to do |format|
-				format.html # search_for_courses.html.erb
-				format.xml  { render :xml => @courses }
+			@courses = Course.all( 	:include => [:class_schedules],
+									:conditions => ["class_schedules.semester = ? OR \
+													class_schedules.year = ? OR \
+													university = ?", 
+													params[:semester], 
+													params[:year],
+													params[:university]
+													]
+								)
+			if @courses.length == 0
+				flash_redirect("No course found!", :action => "show")
+			else
+				respond_to do |format|
+					format.html # search_for_courses.html.erb
+					format.xml  { render :xml => @courses }
+				end
 			end
 		end
 	end
 
+	
+	def manage_users
+		redirect_to(:controller => "users")
+	end
+
+	
 private
 
 	def require_auth
-		unless session[:auth]
+		unless session[:user]
 			flash[:notice] = "You must be logged in"
 			redirect_away(:action => 'login')
 			return false
