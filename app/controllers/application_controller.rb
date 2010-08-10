@@ -35,4 +35,17 @@ class ApplicationController < ActionController::Base
 			redirect_to(*params)
 		end
 	end
+	
+
+	
+private
+
+	def require_admin_for_user_mgmt
+		unless session[:user_id] && User.access?(session[:user_id], "user_mgmt", "admin")
+			flash[:notice] = "Admins only may manage users"
+			redirect_away({:controller=>"info_manager", :action => "show"})
+			return false
+		end
+	end	
+		
 end

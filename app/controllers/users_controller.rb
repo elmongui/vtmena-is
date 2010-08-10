@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	#before_filter :require_admin
+	before_filter :require_admin_for_user_mgmt
 
 	# GET /users
 	# GET /users.xml
@@ -94,17 +94,6 @@ class UsersController < ApplicationController
 		respond_to do |format|
 			format.html { redirect_to(users_url) }
 			format.xml { head :ok }
-		end
-	end
-
-	
-private
-
-	def require_admin
-		unless session[:user_id] && User.access?(session[:user_id], 0)
-			flash[:notice] = "Admins only may manage users" + User.access?(session[:user_id], 0).inspect
-			redirect_away({:controller=>"info_manager", :action => "show"})
-			return false
 		end
 	end
 end

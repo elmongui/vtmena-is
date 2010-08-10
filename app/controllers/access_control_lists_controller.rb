@@ -1,4 +1,6 @@
 class AccessControlListsController < ApplicationController
+	before_filter :require_admin_for_user_mgmt
+
 	def index
 		respond_to do |format|
 			format.html # index.html.erb
