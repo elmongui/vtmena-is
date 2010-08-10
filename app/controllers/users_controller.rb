@@ -46,9 +46,21 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])
 		respond_to do |format|
 			if @user.save
-				flash[:notice] = "User #{@user.name} was successfully created."
-				format.html { redirect_to(:action=>'index') }
-				format.xml { render :xml => @user, :status => :created, :location => @user }
+				@acl = AccessControlList.new
+				@acl.user_id = @user.id
+				@acl.user_mgmt = 'none'
+				@acl.student_mgmt = 'none'
+				@acl.course_mgmt = 'none'
+				@acl.library_mgmt = 'none'
+				if @acl.save
+					flash[:notice] = "User #{@user.name} was successfully created."
+					format.html { redirect_to(:action=>'index') }
+					format.xml { render :xml => @user, :status => :created, :location => @user }
+				else
+					@user.destroy
+					format.html { render :action => "new" }
+					format.xml { render :xml => @acl.errors, :status => :unprocessable_entity }
+				end
 			else
 				format.html { render :action => "new" }
 				format.xml { render :xml => @user.errors, :status => :unprocessable_entity }
