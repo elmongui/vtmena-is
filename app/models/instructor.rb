@@ -6,4 +6,8 @@ class Instructor < ActiveRecord::Base
 		"#{professor.to_label}"
 		#"#{class_schedule.to_label}"
 	end
+
+	def to_s
+		"#{professor.to_label}"
+	end
 end

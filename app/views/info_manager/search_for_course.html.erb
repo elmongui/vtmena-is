@@ -1,57 +1,71 @@
-<h1>Courses</h1>
-
-<table>
-	<tr>
-		<th>Query:</th>
-		<td align="right">University:</td>
-		<td><%=h params[:university] %></td>
-	</tr>
-	<tr>
-		<th />
-		<td align="right">Semester:</td>
-		<td><%=h params[:semester] %></td>
-	</tr>
-	<tr>
-		<th />
-		<td align="right">Year:</td>
-		<td><%=h params[:year] %></td>
-	</tr>
-</table>
+<div class='vtmena-form' align="right">
+	<%= link_to "Logout", :action=>"logout" %>
+</div>
 
 
-
-<table border="1">
-	<tr>
-		<th>University</th>
-		<th>Course number</th>
-		<th>Topic</th>
-		<th>Semester</th>
-		<th>Year</th>
-		<th>VTel</th>
-		<th>Offered?</th>
-	</tr>
-	<% for course in @courses %>
-		<% for class_schedule in course.class_schedules %>
-			<tr>
-				<td><%=h course.university %></td>
-				<td><%=h course.number %></td>
-				<td><%=h course.topic %></td>
-				<td><%=h class_schedule.nil? ? "" : class_schedule.semester %></td>
-				<td><%=h class_schedule.nil? ? "" : class_schedule.year %></td>
-				<td><%=h class_schedule.nil? ? "" : class_schedule.vtel %></td>
-				<td><%=h class_schedule.nil? ? "" : class_schedule.offered %></td>
-			</tr>
-		<% end %>
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Query</legend>
+			<div>
+				<strong><label>University:</label></strong>
+				<label style="text-align:left"><%= params[:university] %></label>
+			</div>
+			<div>
+				<strong><label>Semester:</label></strong>
+				<label style="text-align:left"><%= params[:semester] %></label>
+			</div>
+			<div>
+				<strong><label>Year:</label></strong>
+				<label style="text-align:left"><%= params[:year] %></label>
+			</div>
+		</fieldset>
 	<% end %>
-	<tr>
-		<td colspan="7"></td>
-	</tr>
-	<tr>
-		<td colspan="7" align="right"><%=h @courses.length%> course<%=h @courses.length>1 ? "s" : "" %> found!</td>
-	</tr>
-</table>
+</div>
+<br />
+<br />
 
-<hr />
+	
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Select a Course</legend>
+			<table border="1">
+				<tr>
+					<th>University</th>
+					<th>Course number</th>
+					<th>Topic</th>
+					<th>Semester</th>
+					<th>Year</th>
+					<th>VTel</th>
+					<th>Offered?</th>
+				</tr>
+				<% for course in @courses %>
+					<% for class_schedule in course.class_schedules %>
+						<tr>
+							<td><%=h course.university %></td>
+							<td><%=h course.number %></td>
+							<td><%=h course.topic %></td>
+							<td><%=h class_schedule.nil? ? "" : class_schedule.semester %></td>
+							<td><%=h class_schedule.nil? ? "" : class_schedule.year %></td>
+							<td><%=h class_schedule.nil? ? "" : class_schedule.vtel %></td>
+							<td><%=h class_schedule.nil? ? "" : class_schedule.offered %></td>
+						</tr>
+					<% end %>
+				<% end %>
+				<tr>
+					<td colspan="7"></td>
+				</tr>
+				<tr>
+					<td colspan="7" align="right"><%=h @courses.length%> course<%=h @courses.length>1 ? "s" : "" %> found!</td>
+				</tr>
+			</table>
+		</fieldset>
+	<% end %>
+</div>
+
+
 <%= link_to 'Back', info_manager_path %>
+
 
 

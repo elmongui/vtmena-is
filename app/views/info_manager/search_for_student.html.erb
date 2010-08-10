@@ -1,55 +1,65 @@
-<h1>Students</h1>
-
-<table>
-	<tr>
-		<th>Query:</th>
-		<td align="right">Student ID:</td>
-		<td><%=h params[:student_id_number] %></td>
-	</tr>
-	<tr>
-		<th />
-		<td align="right">Student PID:</td>
-		<td><%=h params[:student_pid] %></td>
-	</tr>
-	<tr>
-		<th />
-		<td align="right">Last name:</td>
-		<td><%=h params[:last_name] %></td>
-	</tr>
-</table>
+<div class='vtmena-form' align="right">
+	<%= link_to "Logout", :action=>"logout" %>
+</div>
 
 
-
-<table border="1">
-	<tr>
-		<th>Student ID</th>
-		<th>Student PID</th>
-		<th>Name</th>
-		<th>Department</th>
-	</tr>
-	<% for student in @students %>
-		<tr>
-			<td><%=h student.vt_info.nil? ? "" : student.vt_info.student_id_number %></td>
-			<td>
-				<a href="mailto:<%=h student.email%>">
-					<%=h student.vt_info.nil? ? "" : student.vt_info.student_pid %>
-				</a>
-			</td>
-			<td>
-				<%= link_to student.name, student %>
-			</td>
-			<td><%=h student.vt_info.nil? ? "" : student.vt_info.department %></td>
-		</tr>
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Query</legend>
+			<div>
+				<strong><label>Student ID:</label></strong>
+				<label style="text-align:left"><%= params[:student_id_number] %></label>
+			</div>
+			<div>
+				<strong><label>Student PID:</label></strong>
+				<label style="text-align:left"><%= params[:student_pid] %></label>
+			</div>
+			<div>
+				<strong><label>Last name:</label></strong>
+				<label style="text-align:left"><%= params[:last_name] %></label>
+			</div>
+		</fieldset>
 	<% end %>
-	<tr>
-		<td colspan="4"></td>
-	</tr>
-	<tr>
-		<td colspan="4" align="right"><%=h @students.length%> student<%=h @students.length>1 ? "s" : "" %> found!</td>
-	</tr>
-</table>
+</div>
+<br />
+<br />
+	
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Select a Student</legend>
+			<table border="1">
+				<tr>
+					<th>Student ID</th>
+					<th>Student PID</th>
+					<th>Name</th>
+					<th>Department</th>
+				</tr>
+				<% for student in @students %>
+					<tr>
+						<td><%=h student.vt_info.nil? ? "" : student.vt_info.student_id_number %></td>
+						<td>
+							<a href="mailto:<%=h student.email%>">
+								<%=h student.vt_info.nil? ? "" : student.vt_info.student_pid %>
+							</a>
+						</td>
+						<td>
+							<%= link_to student.name, :controller => "students", :action => "student_info_sheet", :id => student %>
+						</td>
+						<td><%=h student.vt_info.nil? ? "" : student.vt_info.department %></td>
+					</tr>
+				<% end %>
+				<tr>
+					<td colspan="4"></td>
+				</tr>
+				<tr>
+					<td colspan="4" align="right"><%=h @students.length%> student<%=h @students.length>1 ? "s" : "" %> found!</td>
+				</tr>
+			</table>
+		</fieldset>
+	<% end %>
+</div>
 
-<hr />
+
 <%= link_to 'Back', info_manager_path %>
-
-

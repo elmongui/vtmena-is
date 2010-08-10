@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100808072202) do
+ActiveRecord::Schema.define(:version => 20100810105257) do
 
   create_table "academic_credentials", :force => true do |t|
     t.integer  "student_id"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(:version => 20100808072202) do
     t.string   "name"
     t.string   "status"
     t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "access_control_lists", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "user_mgmt"
+    t.string   "student_mgmt"
+    t.string   "course_mgmt"
+    t.string   "library_mgmt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -103,6 +113,16 @@ ActiveRecord::Schema.define(:version => 20100808072202) do
     t.datetime "updated_at"
   end
 
+  create_table "library_items", :force => true do |t|
+    t.string   "type"
+    t.string   "name"
+    t.string   "authors"
+    t.integer  "count"
+    t.integer  "edition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "people", :force => true do |t|
     t.string   "type"
     t.string   "first_name"
@@ -143,6 +163,16 @@ ActiveRecord::Schema.define(:version => 20100808072202) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :default => "", :null => false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "us_residencies", :force => true do |t|
     t.integer  "person_id"

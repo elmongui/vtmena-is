@@ -1,0 +1,29 @@
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Access Control Lists</legend>
+			<table border>
+				<tr>
+					<th>Login</th>
+					<th>User Mgmt</th>
+					<th>Student Mgmt</th>
+					<th>Course Mgmt</th>
+					<th>Library Mgmt</th>
+				</tr>
+				<% for acl in AccessControlList.all %>
+					<tr>
+						<th align="center"><%=link_to User.find_by_id(acl.user_id).name, edit_access_control_list_path(acl) %></th>
+						<td align="center"><%=h acl.user_mgmt %></td>
+						<td align="center"><%=h acl.student_mgmt %></td>
+						<td align="center"><%=h acl.course_mgmt %></td>
+						<td align="center"><%=h acl.library_mgmt %></td>
+					</tr>
+				<% end %>
+			</table>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<%= link_to 'Home', info_manager_path %>

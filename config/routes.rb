@@ -1,7 +1,13 @@
 ActionController::Routing::Routes.draw do |map|
+	map.resources :periodicals, :active_scaffold => true
+
+	map.resources :books, :active_scaffold => true
+
+	map.resources :access_control_lists
+
 	map.resource :info_manager, :controller=>:info_manager
 	
-	map.resources :users
+	map.resources :users, :active_scaffold => true
 	
 	map.resources :advisorships, :active_scaffold => true
 

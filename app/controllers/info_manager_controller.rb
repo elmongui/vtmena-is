@@ -5,7 +5,7 @@ class InfoManagerController < ApplicationController
 		if request.post?
 			user = User.authenticate(params[:name], params[:password])
 			if user
-				session[:user] = user
+				session[:user_id] = user.id
 				redirect_back(:action => 'show')
 			else
 				flash.now[:notice] = "Invalid user/password combination"
@@ -14,7 +14,7 @@ class InfoManagerController < ApplicationController
 	end
 
 	def logout
-		session[:user] = nil
+		session[:user_id] = nil
 		flash_redirect("User successfully logged out", :action => "login") 
 	end
 
@@ -69,15 +69,10 @@ class InfoManagerController < ApplicationController
 	end
 
 	
-	def manage_users
-		redirect_to(:controller => "users")
-	end
-
-	
 private
 
 	def require_auth
-		unless session[:user]
+		unless session[:user_id]
 			flash[:notice] = "You must be logged in"
 			redirect_away(:action => 'login')
 			return false

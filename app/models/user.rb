@@ -1,5 +1,8 @@
 require 'digest/sha1'
+
 class User < ActiveRecord::Base
+	has_many :access_control_items
+	
 	validates_presence_of :name
 	validates_uniqueness_of :name
 
@@ -8,16 +11,19 @@ class User < ActiveRecord::Base
 	validates_confirmation_of :password
 	validate :password_non_blank
 	
+	
 	def password
 		@password
 	end
 
+	
 	def password=(pwd)
 		@password = pwd
 		return if pwd.blank?
 		create_new_salt
 		self.hashed_password = User.encrypted_password(self.password, self.salt)
 	end
+	
 	
 	def self.authenticate(name, password)
 		user = self.find_by_name(name)
@@ -29,6 +35,14 @@ class User < ActiveRecord::Base
 		end
 		user
 	end
+
+	
+	def self.access?(initiator, target, operation) # (subject, object)
+		acl = AccessControlList.find_by_user_id(initiator)
+		access = acl.attributes[target]
+		!access.index(operation).nil?
+	end
+	
 	
 private
 

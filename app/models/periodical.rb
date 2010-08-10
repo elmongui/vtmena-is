@@ -1,0 +1,2 @@
+class Periodical < LibraryItem
+end

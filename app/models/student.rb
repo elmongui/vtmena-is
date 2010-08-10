@@ -9,4 +9,8 @@ class Student < Person
 	has_many :class_schedules, :through => :registered_classes
 	has_many :advisorships
 	has_many :professors, :through => :advisorships
+	
+	def academic_milestones_sorted_by_date
+		academic_milestones.find(:all, :order => "date ASC")
 	end
+end

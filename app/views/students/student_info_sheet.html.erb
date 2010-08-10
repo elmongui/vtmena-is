@@ -1,0 +1,435 @@
+<div class='vtmena-form' align="right">
+	<%= link_to "Logout", :action=>"logout" %>
+</div>
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Personal Information</legend>
+			<table>
+				<tr>
+					<th align="right">Last Name:</th>
+					<td><%= @student.last_name %></td>
+					<td style="width:100px"/>
+					<td colspan="2" />
+				</tr>
+				<tr>
+					<th align="right">First Name:</th>
+					<td><%= @student.first_name %></td>
+					<td colspan="3" />
+				</tr>
+				<tr>
+					<th align="right">Middle Names:</th>
+					<td><%= @student.middle_names %></td>
+					<td colspan="3" />
+				</tr>
+				<tr>
+					<th align="right">Email:</th>
+					<td><%= @student.email %></td>
+					<td colspan="3" />
+				</tr>
+				<tr>
+					<th align="right">Phones:</th>
+					<td>
+						<% @sep = "" %>
+						<% for phone in @student.phones %>
+							<%=h @sep %><%=h phone.number %>
+							<% @sep = ", " %>
+						<% end %>
+					</td>
+					<td colspan="3" />
+				</tr>
+				<tr>
+					<th align="right">Mailing Address:</th>
+					<td><%= @student.address_1 %></td>
+					<td colspan="3" />
+				</tr>
+				<% if @student.address_2 %>
+					<tr>
+						<th align="right">&nbsp;</th>
+						<td><%= @student.address_2 %></td>
+						<td colspan="3" />
+					</tr>
+				<% end %>
+				<tr>
+					<th align="right">City, Governorate:</th>
+					<td><%= @student.city %>, <%= @student.governorate %></td>
+					<td />
+					<th align="right">Postal Code:</th>
+					<td><%= @student.postal_code %></td>
+				</tr>
+			</table>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>US Residency</legend>
+			<% if @student.us_residency %>
+				<table>
+					<tr>
+						<th align="right">Date Started:</th>
+						<td><%= @student.us_residency.date_started %></td>
+						<th align="right">Date Ended:</th>
+						<td><%= @student.us_residency.date_ended %></td>
+					</tr>
+					<tr>
+						<th align="right">US Phones:</th>
+						<td>
+							<% @sep = "" %>
+							<% for phone in @student.us_residency.phones %>
+								<%=h @sep %><%=h phone.number %>
+								<% @sep = ", " %>
+							<% end %>
+						</td>
+						<td colspan="2" />
+					</tr>
+					<tr>
+						<th align="right">US Mailing Address:</th>
+						<td colspan="3"><%= @student.us_residency.address_1 %></td>
+					</tr>
+					<% if @student.us_residency.address_2 %>
+						<tr>
+							<th align="right">&nbsp;</th>
+							<td colspan="3"><%= @student.us_residency.address_2 %></td>
+						</tr>
+					<% end %>
+					<tr>
+						<th align="right">US City, State:</th>
+						<td><%= @student.us_residency.city %>, <%= @student.us_residency.state %></td>
+						<th align="right">Zip Code:</th>
+						<td><%= @student.us_residency.zipcode %></td>
+					</tr>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Academic Credentials</legend>
+			<% if @student.academic_credential %>
+				<table>
+					<tr>
+						<th align="right">B.Sc. University:</th>
+						<td><%= @student.academic_credential.b_sc_university %></td>
+						<td style="width:100px"/>
+						<th align="right">B.Sc. Year:</th>
+						<td><%= @student.academic_credential.b_sc_year %></td>
+					</tr>
+					<tr>
+						<th align="right">B.Sc. Area:</th>
+						<td><%= @student.academic_credential.b_sc_area %></td>
+						<td />
+						<th align="right">GPA:</th>
+						<td><%= @student.academic_credential.b_sc_gpa %></td>
+					</tr>
+					<tr>
+						<th align="right">M.Sc. University:</th>
+						<td><%= @student.academic_credential.m_sc_university %></td>
+						<td />
+						<th align="right">M.Sc. Year:</th>
+						<td><%= @student.academic_credential.m_sc_year %></td>
+					</tr>
+					<tr>
+						<th align="right">M.Sc. Area:</th>
+						<td><%= @student.academic_credential.m_sc_area %></td>
+						<td />
+						<th align="right">GPA:</th>
+						<td><%= @student.academic_credential.m_sc_gpa %></td>
+					</tr>
+					<tr>
+						<th align="right">GRE Scores V, Q, A:</th>
+						<td>
+							<%= @student.academic_credential.gre_v %>, 
+							<%= @student.academic_credential.gre_q %>, 
+							<%= @student.academic_credential.gre_a %> 
+						</td>
+						<td />
+						<th align="right">TOEFL Score:</th>
+						<td><%= @student.academic_credential.toefl %></td>
+					</tr>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Current Employment</legend>
+			<% if @student.employment %>
+				<table>
+					<tr>
+						<th align="right">Present Employer:</th>
+						<td colspan="4"><%= @student.employment.present_employer %></td>
+					</tr>
+					<tr>
+						<th align="right">Position:</th>
+						<td colspan="4"><%= @student.employment.position %></td>
+					</tr>
+					<tr>
+						<th align="right">Government University/Institute:</th>
+						<td><%= @student.employment.government %></td>
+						<td />
+						<th align="right">On a Mission?:</th>
+						<td><%= @student.employment.mission %></td>
+					</tr>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Virginia Tech Info</legend>
+			<% if @student.vt_info %>
+				<table>
+					<tr>
+						<th align="right">Student PID:</th>
+						<td><%= @student.vt_info.student_pid %></td>
+						<td style="width:100px"/>
+						<th align="right">Student ID:</th>
+						<td><%= @student.vt_info.student_id_number %></td>
+					</tr>
+					<tr>
+						<th align="right">Department:</th>
+						<td><%= @student.vt_info.department %></td>
+						<td />
+						<th align="right">Degree:</th>
+						<td><%= @student.vt_info.degree %></td>
+					</tr>
+					<tr>
+						<th align="right">Degree Program:</th>
+						<td><%= @student.vt_info.degree_program %></td>
+						<td />
+						<th align="right">Area:</th>
+						<td><%= @student.vt_info.area %></td>
+					</tr>
+					<tr>
+						<th align="right">Semester Admitted:</th>
+						<td><%= @student.vt_info.semester_admitted %></td>
+						<td />
+						<th align="right">Year:</th>
+						<td><%= @student.vt_info.year %></td>
+					</tr>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Alexandria University Info</legend>
+			<% if @student.au_info %>
+				<table>
+					<tr>
+						<th align="right">Department:</th>
+						<td><%= @student.au_info.department %></td>
+						<td />
+						<th align="right">Degree:</th>
+						<td><%= @student.au_info.degree %></td>
+					</tr>
+					<tr>
+						<th align="right">Degree Program:</th>
+						<td><%= @student.au_info.degree_program %></td>
+						<td />
+						<th align="right">Area:</th>
+						<td><%= @student.au_info.area %></td>
+					</tr>
+					<tr>
+						<th align="right">Semester Admitted:</th>
+						<td><%= @student.au_info.semester_admitted %></td>
+						<td />
+						<th align="right">Year:</th>
+						<td><%= @student.au_info.year %></td>
+					</tr>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Advisors</legend>
+			<% if @student.professors %>
+				<table>
+					<% for professor in @student.professors %>
+						<tr>
+							<th align="right">Advisor:</th>
+							<td><%= professor.name %></td>
+							<td />
+							<th align="right">University:</th>
+							<td><%= professor.university %></td>
+							<td />
+							<th align="right">Department:</th>
+							<td><%= professor.department %></td>
+						</tr>
+					<% end %>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>VT-MENA Academic Progress</legend>
+			<% if @student.vtmena_academic_progress %>
+				<table>
+					<tr>
+						<th align="right">Research Topic:</th>
+						<td colspan="6"><%= @student.vtmena_academic_progress.research_topic %></td>
+					</tr>
+					<tr>
+						<th align="right">VT Course Cr Hrs:</th>
+						<td><%= @student.vtmena_academic_progress.vt_course_credits %></td>
+						<td style="width:50px"/>
+						<th align="right">VT Research Cr Hrs:</th>
+						<td><%= @student.vtmena_academic_progress.vt_research_credits %></td>
+						<td style="width:50px"/>
+						<th align="right">VT GPA:</th>
+						<td><%= @student.vtmena_academic_progress.vt_gpa %></td>
+					<tr>
+						<th align="right">AU Course Cr Hrs:</th>
+						<td><%= @student.vtmena_academic_progress.au_course_credits %></td>
+						<td />
+						<th align="right">AU Research Cr Hrs:</th>
+						<td><%= @student.vtmena_academic_progress.au_research_credits %></td>
+						<td />
+						<th align="right">AU GPA:</th>
+						<td><%= @student.vtmena_academic_progress.au_gpa %></td>
+					</tr>
+					<tr>
+						<th align="right">Total Course Cr Hrs:</th>
+						<td><%= @student.vtmena_academic_progress.total_course_credits %></td>
+						<td />
+						<th align="right">Total Research Cr Hrs:</th>
+						<td><%= @student.vtmena_academic_progress.total_research_credits %></td>
+						<td colspan="3" />
+					</tr>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Academic Milestones</legend>
+			<% if @student.academic_milestones %>
+				<table>
+					<% for milestone in @student.academic_milestones_sorted_by_date %>
+						<tr>
+							<th align="right"><%= milestone.name %>:</th>
+							<td><%= milestone.status %></td>
+							<td />
+							<th align="right">Date:</th>
+							<td><%= milestone.date %></td>
+						</tr>
+					<% end %>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Courses Taken</legend>
+			<% if @student.registered_classes %>
+				<table border>
+						<tr>
+							<th>Number</th>
+							<th>Topic</th>
+							<th>Instructor</th>
+							<th>Grade</th>
+							<th>Semester</th>
+							<th>Year</th>
+							<th>VTel?</th>
+							<th>University</th>
+						</tr>
+					<% for registered_class in @student.registered_classes %>
+						<tr>
+							<td><%= registered_class.class_schedule.course.number %></td>
+							<td><%= registered_class.class_schedule.course.topic %></td>
+							<td><%= registered_class.class_schedule.instructors_as_a_string %></td>
+							<td><%= registered_class.grade %></td>
+							<td><%= registered_class.class_schedule.semester %></td>
+							<td><%= registered_class.class_schedule.year %></td>
+							<td><%= registered_class.class_schedule.vtel %></td>
+							<td><%= registered_class.class_schedule.course.university %></td>
+						</tr>
+					<% end %>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Achievements</legend>
+			<% if @student.achievements %>
+				<table border>
+						<tr>
+							<th>Type</th>
+							<th>Title</th>
+							<th>Authors</th>
+							<th>Outlet</th>
+							<th>Year</th>
+						</tr>
+					<% for achievement in @student.achievements %>
+						<tr>
+							<td><%= achievement.kind %></td>
+							<td><%= achievement.title %></td>
+							<td><%= achievement.authors %></td>
+							<td><%= achievement.outlet %></td>
+							<td><%= achievement.year %></td>
+						</tr>
+					<% end %>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<%= link_to 'Home', info_manager_path %>

@@ -1,0 +1,39 @@
+<div class="vtmena-form">
+	<% form_for(@acl_to_edit) do |f| %>
+		<fieldset>
+			<legend>Access Control Lists</legend>
+			<table>
+				<tr>
+					<th><u>Login</u></th>
+					<th><u>User Mgmt</u></th>
+					<th><u>Student Mgmt</u></th>
+					<th><u>Course Mgmt</u></th>
+					<th><u>Library Mgmt</u></th>
+				</tr>
+				<% for acl in AccessControlList.all %>
+					<tr>
+						<% if acl == @acl_to_edit %>
+							<th align="center"><%=h User.find_by_id(acl.user_id).name %></th>
+							<td align="center"><%= f.select :user_mgmt, AccessControlList.select_options(acl.user_mgmt) %></td>
+							<td align="center"><%= f.select :student_mgmt, AccessControlList.select_options(acl.student_mgmt) %></td>
+							<td align="center"><%= f.select :course_mgmt, AccessControlList.select_options(acl.course_mgmt) %></td>
+							<td align="center"><%= f.select :library_mgmt, AccessControlList.select_options(acl.library_mgmt) %></td>
+							<td>
+								<%= f.submit 'Update' %>
+							</td>
+						<% else %>
+							<th align="center"><%=h User.find_by_id(acl.user_id).name %></th>
+							<td align="center"><%=h acl.user_mgmt %></td>
+							<td align="center"><%=h acl.course_mgmt %></td>
+							<td align="center"><%=h acl.student_mgmt %></td>
+							<td align="center"><%=h acl.library_mgmt %></td>
+						<% end %>
+					</tr>
+				<% end %>
+			</table>
+		</fieldset>
+	<% end %>
+	<%= link_to 'Back', access_control_lists_path, {:method=>'get'} %>
+</div>
+<p />
+

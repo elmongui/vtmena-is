@@ -1,6 +1,6 @@
 ---
 chdir: /usr/local/vtmena-is/current
-port: "9000"
+port: 9000
 log: log/thin.log
 max_conns: 1024
 timeout: 30
@@ -8,5 +8,5 @@ environment: production
 max_persistent_conns: 512
 daemonize: true
 address: 0.0.0.0
-pid_file: log/thin.pid
+pid: log/thin.pid
 servers: 2
