@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100810130148) do
+ActiveRecord::Schema.define(:version => 20100810205630) do
 
   create_table "academic_credentials", :force => true do |t|
     t.integer  "student_id"
@@ -109,6 +109,15 @@ ActiveRecord::Schema.define(:version => 20100810130148) do
   create_table "instructors", :force => true do |t|
     t.integer  "professor_id"
     t.integer  "class_schedule_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "library_checkouts", :force => true do |t|
+    t.integer  "library_item_id"
+    t.integer  "person_id"
+    t.date     "checkout"
+    t.date     "checkin"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

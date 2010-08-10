@@ -21,7 +21,7 @@ class InfoManagerController < ApplicationController
 	
 	def search_for_student
 		if params[:last_name].nil?
-			flash_redirect("Invalid search parameters", :action => "show") 
+			@students = Student.all
 		else
 			@students = Student.all(:include => [:vt_info],
 									:conditions => ["vt_infos.student_id_number = ? OR \
@@ -32,13 +32,13 @@ class InfoManagerController < ApplicationController
 													params[:last_name].strip
 													]
 									)
-			if @students.length == 0
-				flash_redirect("No student found!", :action => "show")
-			else
-				respond_to do |format|
-					format.html # search_for_student.html.erb
-					format.xml  { render :xml => @students }
-				end
+		end
+		if @students.length == 0
+			flash_redirect("No student found!", :action => "show")
+		else
+			respond_to do |format|
+				format.html # search_for_student.html.erb
+				format.xml  { render :xml => @students }
 			end
 		end
 	end

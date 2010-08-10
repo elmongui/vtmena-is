@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  library_item_id: 1
+  person_id: 1
+  checkout: 2010-08-10
+  checkin: 2010-08-10
+
+two:
+  library_item_id: 1
+  person_id: 1
+  checkout: 2010-08-10
+  checkin: 2010-08-10
