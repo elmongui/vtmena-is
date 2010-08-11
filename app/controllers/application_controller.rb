@@ -48,4 +48,12 @@ private
 		end
 	end	
 		
+	def require_edit_for_library_mgmt
+		unless session[:user_id] && User.access?(session[:user_id], "library_mgmt", "edit")
+			flash[:notice] = "Editors only may edit library"
+			redirect_away({:controller=>"info_manager", :action => "show"})
+			return false
+		end
+	end	
+		
 end
