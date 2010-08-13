@@ -9,10 +9,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100810205630) do
+ActiveRecord::Schema.define(:version => 20100813125053) do
 
   create_table "academic_credentials", :force => true do |t|
-    t.integer  "student_id"
+    t.integer  "applicant_id"
     t.string   "b_sc_university"
     t.string   "b_sc_area"
     t.integer  "b_sc_year"
@@ -86,6 +86,13 @@ ActiveRecord::Schema.define(:version => 20100810205630) do
     t.boolean  "offered"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "day"
+    t.string   "location"
+    t.string   "au_crn"
+    t.time     "vt_time_from"
+    t.time     "vt_time_to"
+    t.time     "au_time_from"
+    t.time     "au_time_to"
   end
 
   create_table "courses", :force => true do |t|
@@ -97,7 +104,7 @@ ActiveRecord::Schema.define(:version => 20100810205630) do
   end
 
   create_table "employments", :force => true do |t|
-    t.integer  "student_id"
+    t.integer  "applicant_id"
     t.string   "present_employer"
     t.string   "position"
     t.boolean  "government"
@@ -131,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20100810205630) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "publisher"
+    t.integer  "year"
   end
 
   create_table "people", :force => true do |t|

@@ -44,20 +44,20 @@ class InfoManagerController < ApplicationController
 	end
 
 	
-	def search_for_course
-		if params[:university].nil?
-			flash_redirect("Invalid search parameters", :action => "show") 
+	def list_semester_schedule
+		if params[:semester].nil? or params[:year].nil? or params[:semester]=="" or params[:year]==""
+			flash_redirect("Both semester and year must be selected.", :action => "show") 
 		else
-			@courses = Course.all( 	:include => [:class_schedules],
-									:conditions => ["class_schedules.semester = ? OR \
-													class_schedules.year = ? OR \
-													university = ?", 
+			@class_schedules = ClassSchedule.all(:include => [:course],
+									:conditions => ["semester = ? AND \
+													year = ?", 
 													params[:semester], 
 													params[:year],
-													params[:university]
-													]
+													],
+									:order => "day asc, 
+									au_time_from asc"
 								)
-			if @courses.length == 0
+			if @class_schedules.length == 0
 				flash_redirect("No course found!", :action => "show")
 			else
 				respond_to do |format|

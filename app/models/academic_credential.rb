@@ -1,3 +1,3 @@
 class AcademicCredential < ActiveRecord::Base
-  belongs_to :student
+  belongs_to :applicant
 end

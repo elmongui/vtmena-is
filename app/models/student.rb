@@ -1,6 +1,4 @@
-class Student < Person
-	has_one :academic_credential
-	has_one :employment
+class Student < Applicant
 	has_one :vt_info
 	has_one :au_info
 	has_one :vtmena_academic_progress

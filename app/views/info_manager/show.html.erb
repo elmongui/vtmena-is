@@ -34,13 +34,9 @@
 					</td>
 					<td valign="top">
 						<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "course_mgmt", "view") ? "block" : "none" %>'>
-							<% form_tag '/info_manager/search_for_course' do %>
+							<% form_tag '/info_manager/list_semester_schedule' do %>
 								<fieldset>
-									<legend>Courses' Info</legend>
-									<div>
-										<label for='university'>University:</label>
-										<%= select_tag :university, '<option></option><option>AU</option><option>VT</option>' %>
-									</div>
+									<legend>Class Schedule</legend>
 									<div>
 										<label for='semester'>Semester:</label>
 										<%= select_tag :semester, "<option></option><option>Fall</option><option>Spring</option><option>Summer</option><option>Summer I</option><option>Summer II</option>" %>

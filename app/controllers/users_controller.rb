@@ -46,12 +46,7 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])
 		respond_to do |format|
 			if @user.save
-				@acl = AccessControlList.new
-				@acl.user_id = @user.id
-				@acl.user_mgmt = 'none'
-				@acl.student_mgmt = 'none'
-				@acl.course_mgmt = 'none'
-				@acl.library_mgmt = 'none'
+				@acl = AccessControlList.DefaultAcl(@user.id)
 				if @acl.save
 					flash[:notice] = "User #{@user.name} was successfully created."
 					format.html { redirect_to(:action=>'index') }

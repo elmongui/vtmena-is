@@ -1,0 +1,68 @@
+<div class='vtmena-form' align="right">
+	<%= link_to "Logout", :action=>"logout" %>
+</div>
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Query</legend>
+			<table>
+				<tr>
+					<th align="right">Semester:</th>
+					<td><%= params[:semester] %></td>
+				</tr>
+				<tr>
+					<th align="right">Year:</th>
+					<td><%= params[:year] %></td>
+				</tr>
+			</table>
+		</fieldset>
+	<% end %>
+</div>
+<br />
+<br />
+
+	
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Course Schedule</legend>
+			<table border="1">
+				<tr>
+					<th></th>
+					<th>AU/VT</th>
+					<th>Course #</th>
+					<th>AU CRN</th>
+					<th>Topic</th>
+					<th>Time*</th>
+					<th>Location</th>
+					<th>Type</th>
+					<th>Instructors</th>
+				</tr>
+				<% for class_schedule in @class_schedules %>
+					<tr>
+						<th align="center"><%=h class_schedule.day %></th>
+						<td align="center"><%=h class_schedule.course.university %></td>
+						<td><%=h class_schedule.course.number %></td>
+						<td align="center"><%=h class_schedule.nil? ? "" : class_schedule.au_crn %></td>
+						<td><%=h class_schedule.course.topic %></td>
+						<td><%=h class_schedule.au_time %> (EET)<br /><%=h class_schedule.vt_time %> (EST)</td>
+						<td align="center"><%=h class_schedule.location %></td>
+						<td align="center"><%=h class_schedule.vtel %></td>
+						<td align="center"><%=h class_schedule.instructors_as_a_string %></td>
+					</tr>
+				<% end %>
+			</table>
+			<p>
+				<strong><font color="red">*<u>NOTE:</u> Lecture times are shown in <a href="http://www.timeanddate.com/library/abbreviations/timezones/na/est.html" target="_blank">Eastern Standard Time (EST)</a> and <a href="http://www.timeanddate.com/library/abbreviations/timezones/eu/eet.html" target="_blank">Eastern European Time (EET)</a> at the beginning of the semester.</font></strong>
+			</p>
+		</fieldset>
+	<% end %>
+</div>
+
+
+<%= link_to 'Back', info_manager_path %>
+
+
+
