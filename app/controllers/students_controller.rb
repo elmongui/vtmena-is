@@ -14,7 +14,7 @@ class StudentsController < ApplicationController
 		config.nested.add_link("VT-MENA Academic Progress", [:vtmena_academic_progress])
 		config.nested.add_link("Advisorships", [:advisorships])
 		config.nested.add_link("Academic Milestones", [:academic_milestones])
-		config.nested.add_link("Achievements", [:achievements])
+		config.nested.add_link("Registered Classes", [:registered_classes])
 	end
 
   
