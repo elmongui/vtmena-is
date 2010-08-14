@@ -383,10 +383,11 @@
 							<th>University</th>
 						</tr>
 					<% for registered_class in @student.registered_classes %>
-						<% if registered_class.class_schedule.nil? %>
+						<% if registered_class.class_schedule.course.nil? %>
 						<tr>
 							<td><%= registered_class.id %></td>
 							<td><%= registered_class.grade %></td>
+							<td><%= registered_class.class_schedule.id %></td>
 						</tr>
 						<% else %>
 						<tr>
