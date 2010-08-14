@@ -383,6 +383,12 @@
 							<th>University</th>
 						</tr>
 					<% for registered_class in @student.registered_classes %>
+						<% if registered_class.class_schedule.nil? %>
+						<tr>
+							<td><%= registered_class.id %></td>
+							<td><%= registered_class.grade %></td>
+						</tr>
+						<% else %>
 						<tr>
 							<td><%= registered_class.class_schedule.course.number %></td>
 							<td><%= registered_class.class_schedule.course.topic %></td>
@@ -393,6 +399,7 @@
 							<td><%= registered_class.class_schedule.vtel %></td>
 							<td><%= registered_class.class_schedule.course.university %></td>
 						</tr>
+						<% end %>
 					<% end %>
 				</table>
 			<% end %>
