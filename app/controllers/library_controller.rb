@@ -9,7 +9,7 @@ class LibraryController < ApplicationController
 									:order => "name asc"
 								)
 
-								if @books.length==0 and @periodicals.length==0
+			if @books.length==0 and @periodicals.length==0
 				flash_redirect("Library is empty!", :action => "show")
 			else
 				respond_to do |format|
@@ -17,5 +17,14 @@ class LibraryController < ApplicationController
 					format.xml  { render :xml => @courses }
 				end
 			end
+	end
+	
+	
+	def checkout
+		@library_item = LibraryItem.find_by_id(params["id"])
+		respond_to do |format|
+			format.html # checkout.html.erb
+			format.xml  { render :xml => @courses }
+		end
 	end
 end

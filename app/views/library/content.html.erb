@@ -8,7 +8,7 @@
 		<fieldset>
 			<legend>Books</legend>
 			<% if @books and @books.length>0 %>
-				<table border>
+				<table border="1">
 						<tr>
 							<th>Name</th>
 							<th>Authors</th>
@@ -20,7 +20,7 @@
 						</tr>
 					<% for book in @books %>
 						<tr>
-							<td><%= book.name %></td>
+							<td><%= link_to book.name, :controller => "library", :action => "checkout", :id => book %></td>
 							<td><%= book.authors %></td>
 							<td><%= book.edition %></td>
 							<td><%= book.year %></td>
@@ -42,7 +42,7 @@
 		<fieldset>
 			<legend>Periodicals</legend>
 			<% if @periodicals and @periodicals.length>0 %>
-				<table border>
+				<table border="1">
 						<tr>
 							<th>Name</th>
 							<th>Year</th>
@@ -52,7 +52,7 @@
 						</tr>
 					<% for periodical in @periodicals %>
 						<tr>
-							<td><%= periodical.name %></td>
+							<td><%= link_to periodical.name, :controller => "library", :action => "checkout", :id => periodical %></td>
 							<td><%= periodical.year %></td>
 							<td><%= periodical.publisher %></td>
 							<td><%= periodical.count %></td>
@@ -67,4 +67,4 @@
 <p />
 
 
-<%= link_to 'Home', info_manager_path %>
+<%= link_to 'Back', info_manager_path %>
