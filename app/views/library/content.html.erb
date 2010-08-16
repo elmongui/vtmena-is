@@ -1,0 +1,70 @@
+<div class='vtmena-form' align="right">
+	<%= link_to "Logout", :action=>"logout" %>
+</div>
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Books</legend>
+			<% if @books and @books.length>0 %>
+				<table border>
+						<tr>
+							<th>Name</th>
+							<th>Authors</th>
+							<th>Edition</th>
+							<th>Year</th>
+							<th>Publisher</th>
+							<th>Total Count</th>
+							<th>Available</th>
+						</tr>
+					<% for book in @books %>
+						<tr>
+							<td><%= book.name %></td>
+							<td><%= book.authors %></td>
+							<td><%= book.edition %></td>
+							<td><%= book.year %></td>
+							<td><%= book.publisher %></td>
+							<td><%= book.count %></td>
+							<td><%= book.count - book.library_checkouts.length %></td>
+						</tr>
+					<% end %>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Periodicals</legend>
+			<% if @periodicals and @periodicals.length>0 %>
+				<table border>
+						<tr>
+							<th>Name</th>
+							<th>Year</th>
+							<th>Publisher</th>
+							<th>Total Count</th>
+							<th>Available</th>
+						</tr>
+					<% for periodical in @periodicals %>
+						<tr>
+							<td><%= periodical.name %></td>
+							<td><%= periodical.year %></td>
+							<td><%= periodical.publisher %></td>
+							<td><%= periodical.count %></td>
+							<td><%= periodical.count - periodical.library_checkouts.length %></td>
+						</tr>
+					<% end %>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<%= link_to 'Home', info_manager_path %>

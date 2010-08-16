@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+	map.resource :library, :controller=>:library
+
 	map.resources :library_checkouts, :active_scaffold => true
 
 	map.resources :periodicals, :active_scaffold => true

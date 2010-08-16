@@ -48,12 +48,20 @@ private
 		end
 	end	
 		
-	def require_edit_for_library_mgmt
-		unless session[:user_id] && User.access?(session[:user_id], "library_mgmt", "edit")
-			flash[:notice] = "Editors only may edit library"
+	def library_mgmt(access)
+		unless session[:user_id] && User.access?(session[:user_id], "library_mgmt", access)
+			flash[:notice] = "Editors only may " + access.inspect + " library"
 			redirect_away({:controller=>"info_manager", :action => "show"})
 			return false
 		end
+	end	
+		
+	def require_edit_for_library_mgmt
+		library_mgmt("edit")
+	end	
+		
+	def require_view_for_library_mgmt
+		library_mgmt("view")
 	end	
 		
 end

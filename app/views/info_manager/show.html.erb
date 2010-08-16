@@ -87,12 +87,34 @@
 									</div>
 									<div style='display:<%= User.access?(session[:user_id], "library_mgmt", "view") ? "block" : "none" %>'>
 										<strong>List:</string>
-										<%= link_to 'Books', {:controller=>'books', :action=>'index'} %>
-										<%= link_to 'Periodicals', {:controller=>'periodicals', :action=>'index'} %>
+										<%= link_to 'Library Content', {:controller=>'library', :action=>'content'} %>
 									</div>
 								</fieldset>
 							<% end %>
 						</div>		
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td valign="top">
+						<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "course_mgmt", "view") ? "block" : "none" %>'>
+							<% form_tag do %>
+								<fieldset>
+									<legend>Semester Planning</legend>
+									<div>
+										<a href="https://banweb.banner.vt.edu/ssb/prod/hzskvtsc.P_DispRequest" target="_blank">VT Time Table of classes</a><br />
+										<a href="http://www.vbs.vt.edu/Vbsguide/pages/bburg.html" target="_blank">B'burg Video/Broadcast Services</a><br />
+										<a href="http://www.iddl.vt.edu/schedule/ivcrooms.php?id=67" target="_blank">IVC Room Descriptions</a><br />
+										<a href="http://www.iddl.vt.edu/schedule/ivcsites.php" target="_blank">IVC Classroom Locations</a>							
+									</div>
+								</fieldset>
+							<% end %>
+						</div>
 					</td>
 				</tr>
 			</table>

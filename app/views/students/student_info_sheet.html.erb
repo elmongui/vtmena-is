@@ -370,7 +370,7 @@
 	<% form_tag do %>
 		<fieldset>
 			<legend>Courses Taken</legend>
-			<% if @student.registered_classes %>
+			<% if @student.registered_classes and @student.registered_classes.length>0 %>
 				<table border>
 						<tr>
 							<th>Number</th>
@@ -383,18 +383,6 @@
 							<th>University</th>
 						</tr>
 					<% for registered_class in @student.registered_classes %>
-						<% if registered_class.class_schedule.nil? %>
-						<tr>
-							<td><%= registered_class.id %></td>
-							<td><%= registered_class.grade %></td>
-						</tr>
-						<% else if registered_class.class_schedule.course.nil? %>
-						<tr>
-							<td><%= registered_class.id %></td>
-							<td><%= registered_class.grade %></td>
-							<td><%= registered_class.class_schedule.id %></td>
-						</tr>
-						<% else %>
 						<tr>
 							<td><%= registered_class.class_schedule.course.number %></td>
 							<td><%= registered_class.class_schedule.course.topic %></td>
@@ -405,8 +393,6 @@
 							<td><%= registered_class.class_schedule.vtel %></td>
 							<td><%= registered_class.class_schedule.course.university %></td>
 						</tr>
-						<% end %>
-						<% end %>
 					<% end %>
 				</table>
 			<% end %>
@@ -420,7 +406,7 @@
 	<% form_tag do %>
 		<fieldset>
 			<legend>Achievements</legend>
-			<% if @student.achievements %>
+			<% if @student.achievements and @student.achivements.length>0 %>
 				<table border>
 						<tr>
 							<th>Type</th>
