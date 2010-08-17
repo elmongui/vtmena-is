@@ -1,0 +1,60 @@
+<div class='vtmena-form' align="right">
+	<%= link_to "Logout", :action=>"logout" %>
+</div>
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend><%= @borrower.type.to_s %>'s Info</legend>
+			<table>
+				<tr>
+					<th align="right">Name:</th>
+					<td><%= @borrower.name %></td>
+				</tr>
+				<tr>
+					<th align="right">Position:</th>
+					<td><%= @borrower.type.to_s %></td>
+				</tr>
+				<tr>
+					<th align="right">Phones:</th>
+					<td><%= @borrower.phones_list %></td>
+				</tr>
+				<tr>
+					<th align="right">Email:</th>
+					<td><%= @borrower.email %></td>
+				</tr>
+			</table>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Checkouts</legend>
+			<% if @borrower.library_checkouts and @borrower.library_checkouts.length>0 %>
+				<table border="1">
+						<tr>
+							<th>Checkout Date</th>
+							<th>Name</th>
+							<th>Position</th>
+						</tr>
+					<% for checkout in @borrower.library_checkouts %>
+						<tr>
+							<td><%= checkout.checkout %></td>
+							<td><%= checkout.library_item.name %></td>
+							<td><%= checkout.library_item.type.to_s %></td>
+						</tr>
+					<% end %>
+				</table>
+			<% end %>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<%= link_to 'Back', {:controller=>'library', :action=>'content'} %>
+<%= link_to 'Home', info_manager_path %>

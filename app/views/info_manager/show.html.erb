@@ -88,6 +88,7 @@
 									<div style='display:<%= User.access?(session[:user_id], "library_mgmt", "view") ? "block" : "none" %>'>
 										<strong>List:</string>
 										<%= link_to 'Library Content', {:controller=>'library', :action=>'content'} %>
+										<%= link_to 'Checkouts by Person', {:controller=>'library', :action=>'borrowers'} %>
 									</div>
 								</fieldset>
 							<% end %>

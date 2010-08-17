@@ -20,7 +20,7 @@
 						</tr>
 					<% for book in @books %>
 						<tr>
-							<td><%= link_to book.name, :controller => "library", :action => "checkout", :id => book %></td>
+							<td><%= link_to book.name, :controller => "library", :action => "checkout_by_item", :id => book %></td>
 							<td><%= book.authors %></td>
 							<td><%= book.edition %></td>
 							<td><%= book.year %></td>
@@ -52,7 +52,7 @@
 						</tr>
 					<% for periodical in @periodicals %>
 						<tr>
-							<td><%= link_to periodical.name, :controller => "library", :action => "checkout", :id => periodical %></td>
+							<td><%= link_to periodical.name, :controller => "library", :action => "checkout_by_item", :id => periodical %></td>
 							<td><%= periodical.year %></td>
 							<td><%= periodical.publisher %></td>
 							<td><%= periodical.count %></td>

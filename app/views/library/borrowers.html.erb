@@ -1,0 +1,32 @@
+<div class='vtmena-form' align="right">
+	<%= link_to "Logout", :action=>"logout" %>
+</div>
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Select a Student</legend>
+			<table border="1">
+				<tr>
+					<th>Name</th>
+					<th>Position</th>
+					<th>Phones</th>
+					<th>Email</th>
+				</tr>
+				<% for borrower in @borrowers %>
+					<tr>
+						<td><%= link_to borrower.name, :controller => "library", :action => "checkout_by_person", :id => borrower %></td>
+						<td><%= borrower.type.to_s %></td>
+						<td><%= borrower.phones_list %></td>
+						<td><%= borrower.email %></td>
+					</tr>
+				<% end %>
+			</table>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<%= link_to 'Back', info_manager_path %>

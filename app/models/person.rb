@@ -16,5 +16,9 @@ class Person < ActiveRecord::Base
 	def name
 		"#{first_name} #{middle_names} #{last_name}"
 	end
+	
+	def phones_list
+		phones.collect{|ph| ph.number}.join(', ')
+	end
 end
 
