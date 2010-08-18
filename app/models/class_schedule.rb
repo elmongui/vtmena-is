@@ -28,6 +28,10 @@ class ClassSchedule < ActiveRecord::Base
 	
 	
 	def vt_time
-		class_time(attributes["au_time_from"]-(7*60*60), attributes["au_time_to"]-(7*60*60))
+		if attributes["au_time_from"].nil? or attributes["au_time_to"].nil?
+			"-"
+		else
+			class_time(attributes["au_time_from"]-(7*60*60), attributes["au_time_to"]-(7*60*60))
+		end
 	end
 end
