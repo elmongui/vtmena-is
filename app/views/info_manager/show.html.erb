@@ -103,7 +103,7 @@
 			<table>
 				<tr>
 					<td valign="top">
-						<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "course_mgmt", "view") ? "block" : "none" %>'>
+						<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "course_mgmt", "admin") ? "block" : "none" %>'>
 							<% form_tag do %>
 								<fieldset>
 									<legend>Semester Planning</legend>
