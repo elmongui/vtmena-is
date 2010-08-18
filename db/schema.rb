@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100813125053) do
+ActiveRecord::Schema.define(:version => 20100818174455) do
 
   create_table "academic_credentials", :force => true do |t|
     t.integer  "applicant_id"
@@ -89,8 +89,6 @@ ActiveRecord::Schema.define(:version => 20100813125053) do
     t.string   "day"
     t.string   "location"
     t.string   "au_crn"
-    t.time     "vt_time_from"
-    t.time     "vt_time_to"
     t.time     "au_time_from"
     t.time     "au_time_to"
   end
