@@ -1,11 +1,13 @@
 class StudentsController < ApplicationController	
 	active_scaffold :student do |config|
-		config.columns = [:type, :first_name, :middle_names, :last_name, :email, :address_1, :address_2, :city, :governorate, :postal_code, :phones]
+		config.columns = [:type, :title, :first_name, :middle_names, :last_name, :email, :address_1, :address_2, :city, :governorate, :postal_code, :phones]
 		list.columns.exclude :type, :middle_names, :address_1, :address_2, :city, :governorate, :postal_code, :us_residency, :phones
 		create.columns.exclude :type
 		show.columns.exclude :type
 		update.columns.exclude :type
 		config.list.sorting = [{ :first_name => :asc}, {:last_name => :asc}]
+		config.columns[:title].form_ui = :select
+		config.columns[:title].options = Person::title_options
 		config.nested.add_link("US Residency", [:us_residency])
 		config.nested.add_link("Academic Credentials", [:academic_credential])
 		config.nested.add_link("Current Employment", [:employment])

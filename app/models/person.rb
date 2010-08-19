@@ -20,5 +20,10 @@ class Person < ActiveRecord::Base
 	def phones_list
 		phones.collect{|ph| ph.number}.join(', ')
 	end
+	
+	def self.title_options
+		{:options=>[['Mr.','Mr.'], ['Ms.','Ms.'], ['Dr.','Dr.'], ['Eng.','Eng.']]}
+	end
+
 end
 
