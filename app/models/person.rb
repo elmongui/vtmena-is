@@ -6,7 +6,7 @@ class Person < ActiveRecord::Base
 	has_many :library_items, :through => :library_checkouts
 
     def to_label
-		"#{first_name} #{last_name}"
+		"#{title} #{first_name} #{last_name}"
 	end
 	
 	def to_s
@@ -14,7 +14,7 @@ class Person < ActiveRecord::Base
 	end
 	
 	def name
-		"#{first_name} #{middle_names} #{last_name}"
+		"#{title} #{first_name} #{middle_names} #{last_name}"
 	end
 	
 	def phones_list
