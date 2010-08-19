@@ -4,5 +4,9 @@ class ClassSchedulesController < ApplicationController
 		create.columns.exclude :id, :class_sessions
 		update.columns.exclude :id, :class_sessions
 		config.list.sorting = [{:year => :asc}, {:semester => :asc}]
+		config.columns[:year].form_ui = :select
+		config.columns[:year].options = {:options=>[[2008,2008], [2009,2009], [2010,2010], [2011,2011], [2012,2012]]}
+		config.columns[:semester].form_ui = :select
+		config.columns[:semester].options = {:options=>[['Fall','Fall'], ['Spring','Spring'], ['Summer','Summer']]}
 	end
 end
