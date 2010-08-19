@@ -40,17 +40,17 @@
 					<th>Type</th>
 					<th>Instructors</th>
 				</tr>
-				<% for class_schedule in @class_schedules %>
+				<% for class_session in @class_sessions %>
 					<tr>
-						<th align="center"><%=h class_schedule.day %></th>
-						<td align="center"><%=h class_schedule.course.university %></td>
-						<td><%=h class_schedule.course.number %></td>
-						<td align="center"><%=h class_schedule.nil? ? "" : class_schedule.au_crn %></td>
-						<td><%=h class_schedule.course.topic %></td>
-						<td><%=h class_schedule.au_time %> (EET)<br /><%=h class_schedule.vt_time %> (EST)</td>
-						<td align="center"><%=h class_schedule.location %></td>
-						<td align="center"><%=h class_schedule.vtel %></td>
-						<td align="center"><%=h class_schedule.instructors_as_a_string %></td>
+						<th align="center"><%=h Time::RFC2822_DAY_NAME[class_session.day] %></th>
+						<td align="center"><%=h class_session.class_schedule.course.university %></td>
+						<td><%=h class_session.class_schedule.course.number %></td>
+						<td align="center"><%=h class_session.class_schedule.au_crn %></td>
+						<td><%=h class_session.class_schedule.course.topic %></td>
+						<td><%=h class_session.au_time %> (EET)<br /><%=h class_session.vt_time %> (EST)</td>
+						<td align="center"><%=h class_session.location %></td>
+						<td align="center"><%=h class_session.class_schedule.vtel %></td>
+						<td align="center"><%=h class_session.class_schedule.instructors_as_a_string %></td>
 					</tr>
 				<% end %>
 			</table>

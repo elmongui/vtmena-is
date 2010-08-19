@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  class_schedule_id: 1
+  day: 1
+  au_time_from: 2010-08-19 10:40:05
+  au_time_to: 2010-08-19 10:40:05
+
+two:
+  class_schedule_id: 1
+  day: 1
+  au_time_from: 2010-08-19 10:40:05
+  au_time_to: 2010-08-19 10:40:05

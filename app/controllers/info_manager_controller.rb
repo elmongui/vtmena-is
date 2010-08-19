@@ -48,20 +48,20 @@ class InfoManagerController < ApplicationController
 		if params[:semester].nil? or params[:year].nil? or params[:semester]=="" or params[:year]==""
 			flash_redirect("Both semester and year must be selected.", :action => "show") 
 		else
-			@class_schedules = ClassSchedule.all(:include => [:course],
-									:conditions => ["semester = ? AND \
-													year = ?", 
+			@class_sessions = ClassSession.all(:include => [:class_schedule],
+									:conditions => ["class_schedules.semester = ? AND \
+													class_schedules.year = ?", 
 													params[:semester], 
 													params[:year],
 													],
 									:order => "day asc, 
-									au_time_from asc"
+									           au_time_from asc"
 								)
-			if @class_schedules.length == 0
-				flash_redirect("No course found!", :action => "show")
+			if @class_sessions.length == 0
+				flash_redirect("No class sessions found!", :action => "show")
 			else
 				respond_to do |format|
-					format.html # search_for_courses.html.erb
+					format.html # list_semester_schedule.html.erb
 					format.xml  { render :xml => @courses }
 				end
 			end
