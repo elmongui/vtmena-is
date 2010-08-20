@@ -47,7 +47,7 @@
 						<td><%=h class_session.class_schedule.course.number %></td>
 						<td align="center"><%=h class_session.class_schedule.au_crn %></td>
 						<td><%=h class_session.class_schedule.course.topic %></td>
-						<td><%=h class_session.au_time %> (EET)<br /><%=h class_session.vt_time %> (EST)</td>
+						<td><%= link_to (class_session.au_time+'(EET)<br />'+class_session.vt_time+'(EET)<br />'), :controller => "class_schedules", :action => "class_schedule_details", :id => class_session.class_schedule %></td>
 						<td align="center"><%=h class_session.location %></td>
 						<td align="center"><%=h class_session.class_schedule.vtel %></td>
 						<td align="center"><%=h class_session.class_schedule.instructors_as_a_string %></td>

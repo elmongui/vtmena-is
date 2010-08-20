@@ -23,4 +23,8 @@ class ClassSession < ActiveRecord::Base
 			class_time(attributes["au_time_from"]-(7*60*60), attributes["au_time_to"]-(7*60*60))
 		end
 	end
+	
+	def to_s
+		Time::RFC2822_DAY_NAME[attributes["day"]] + ": " + au_time + " (EET), " + vt_time + " (EST)"
+	end
 end

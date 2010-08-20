@@ -1,0 +1,92 @@
+<div class='vtmena-form' align="right">
+	<%= link_to "Logout", :controller=> "info_manager", :action=>"logout" %>
+</div>
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Class Information</legend>
+			<table>
+				<tr>
+					<th align="right">Semester:</th>
+					<td><%= @class_schedule.semester %></td>
+				</tr>
+				<tr>
+					<th align="right">Year:</th>
+					<td><%= @class_schedule.year %></td>
+				</tr>
+				<tr>
+					<th align="right">University:</th>
+					<td><%= @class_schedule.course.university %></td>
+				</tr>
+				<tr>
+					<th align="right">Course #:</th>
+					<td><%= @class_schedule.course.number %></td>
+				</tr>
+				<tr>
+					<th align="right">Topic:</th>
+					<td><%= @class_schedule.course.topic %></td>
+				</tr>
+				<tr>
+					<th align="right">AU CRN:</th>
+					<td><%= @class_schedule.au_crn %></td>
+				</tr>
+				<tr>
+					<th align="right">Type:</th>
+					<td><%= @class_schedule.vtel %></td>
+				</tr>
+				<tr>
+					<th align="right" valign="top">Instructors:</th>
+					<td><%= @class_schedule.instructors.join('<br />') %></td>
+				</tr>
+				<tr>
+					<th align="right" valign="top">Sessions:</th>
+					<td><%= @class_schedule.class_sessions.collect{|sess| sess.to_s}.join('<br />') %></td>
+				</tr>
+			</table>
+		</fieldset>
+	<% end %>
+</div>
+<p />
+
+
+<div class="vtmena-form">
+	<% form_tag do %>
+		<fieldset>
+			<legend>Registering Students</legend>
+			<table border="1">
+				<tr>
+					<th>Student ID</th>
+					<th>Student PID</th>
+					<th>Name</th>
+					<th>Grade</th>
+				</tr>
+				<% for registered_class in @class_schedule.registered_classes %>
+					<tr>
+						<td><%=h registered_class.student.vt_info.nil? ? "" : registered_class.student.vt_info.student_id_number %></td>
+						<td>
+							<a href="mailto:<%=h registered_class.student.email%>">
+								<%=h registered_class.student.vt_info.nil? ? "" : registered_class.student.vt_info.student_pid %>
+							</a>
+						</td>
+						<td>
+							<%= link_to registered_class.student.name, :controller => "students", :action => "student_info_sheet", :id => registered_class.student %>
+						</td>
+						<td><%=h registered_class.grade %></td>
+					</tr>
+				<% end %>
+				<tr>
+					<td colspan="4"></td>
+				</tr>
+				<tr>
+					<td colspan="4" align="right"><%=h @class_schedule.students.length%> student<%=h @class_schedule.students.length>1 ? "s" : "" %> found!</td>
+				</tr>
+			</table>
+		</fieldset>
+	<% end %>
+</div>
+</p>
+
+
+<%= link_to 'Home', info_manager_path %>

@@ -9,4 +9,14 @@ class ClassSchedulesController < ApplicationController
 		config.columns[:semester].form_ui = :select
 		config.columns[:semester].options = {:options=>[['Fall','Fall'], ['Spring','Spring'], ['Summer','Summer']]}
 	end
+	
+	def class_schedule_details
+		@class_schedule = ClassSchedule.find(params[:id],
+								:include => [:instructors, :students])
+		
+		respond_to do |format|
+			format.html # class_schedule_details.html.erb
+			format.xml { render :xml => @user }
+		end
+	end
 end
