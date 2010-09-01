@@ -1,6 +1,6 @@
 class InfoManagerController < ApplicationController
 	before_filter :require_auth, :except => 'login'
-#	protect_from_forgery :only => [:create, :update, :destroy]
+	protect_from_forgery :except => :index
 
 	def login
 		if request.post?
