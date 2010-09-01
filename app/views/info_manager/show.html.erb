@@ -2,14 +2,14 @@
 	<%= link_to "Logout", :action=>"logout" %>
 </div>
 
-<table>
-	<tr>
-		<td>
-			<table>
-				<tr>
-					<td valign="top">
-						<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "student_mgmt", "view") ? "block" : "none" %>'>
-							<% form_tag '/info_manager/search_for_student' do %>
+<% form_tag do %>
+	<table>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td valign="top">
+							<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "student_mgmt", "view") ? "block" : "none" %>'>
 								<fieldset>
 									<legend>Students' Info</legend>
 									<div>
@@ -25,16 +25,14 @@
 										<%= text_field_tag :last_name, params[:last_name] %>
 									</div>
 									<div>
-										<%= submit_tag 'Search' %>
+										<%= button_to 'Search', {:controller=>'info_manager', :action=>'search_for_student'} %>
 										<%= link_to 'List All Students?', {:controller=>'info_manager', :action=>'search_for_student'} %>
 									</div>
 								</fieldset>
-							<% end %>
-						</div>
-					</td>
-					<td valign="top">
-						<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "course_mgmt", "view") ? "block" : "none" %>'>
-							<% form_tag '/info_manager/list_semester_schedule' do %>
+							</div>
+						</td>
+						<td valign="top">
+							<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "course_mgmt", "view") ? "block" : "none" %>'>
 								<fieldset>
 									<legend>Class Schedule</legend>
 									<div>
@@ -46,23 +44,21 @@
 										<%= select_tag :year, "<option></option><option>2008</option><option>2009</option><option>2010</option><option>2011</option><option>2012</option><option>2013</option>" %>
 									</div>
 									<div>
-										<%= submit_tag 'Search' %>
+										<%= button_to 'Search', {:controller=>'info_manager', :action=>'list_semester_schedule'} %>
 									</div>
 								</fieldset>
-							<% end %>	
-						</div>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table>
-				<tr>
-					<td valign="top">
-						<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "user_mgmt", "admin") ? "block" : "none" %>'>
-							<% form_tag do %>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td valign="top">
+							<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "user_mgmt", "admin") ? "block" : "none" %>'>
 								<fieldset>
 									<legend>Manage Users</legend>
 									<div>
@@ -71,12 +67,10 @@
 										<%= link_to "Access Control Lists", access_control_lists_path %>
 									</div>
 								</fieldset>
-							<% end %>
-						</div>
-					</td>
-					<td valign="top">
-						<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "library_mgmt", "view") ? "block" : "none" %>'>
-							<% form_tag do %>
+							</div>
+						</td>
+						<td valign="top">
+							<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "library_mgmt", "view") ? "block" : "none" %>'>
 								<fieldset>
 									<legend>Library</legend>
 									<div style='display:<%= User.access?(session[:user_id], "library_mgmt", "edit") ? "block" : "none" %>'>
@@ -91,20 +85,18 @@
 										<%= link_to 'Checkouts by Person', {:controller=>'library', :action=>'borrowers'} %>
 									</div>
 								</fieldset>
-							<% end %>
-						</div>		
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table>
-				<tr>
-					<td valign="top">
-						<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "course_mgmt", "admin") ? "block" : "none" %>'>
-							<% form_tag do %>
+							</div>		
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td valign="top">
+							<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "course_mgmt", "admin") ? "block" : "none" %>'>
 								<fieldset>
 									<legend>Semester Planning</legend>
 									<div>
@@ -114,11 +106,11 @@
 										<a href="http://www.iddl.vt.edu/schedule/ivcsites.php" target="_blank">IVC Classroom Locations</a>							
 									</div>
 								</fieldset>
-							<% end %>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+<% end %>
