@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_filter :require_admin_for_user_mgmt
+	protect_from_forgery :only => [:create, :update, :destroy]
 
 	# GET /users
 	# GET /users.xml
