@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	before_filter :require_admin_for_user_mgmt
-	protect_from_forgery :only => [:create, :update, :destroy]
+#	protect_from_forgery :only => [:create, :update, :destroy]
 
 	# GET /users
 	# GET /users.xml
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 				@acl = AccessControlList.DefaultAcl(@user.id)
 				if @acl.save
 					flash[:notice] = "User #{@user.name} was successfully created."
-					format.html { redirect_to(:action=>'index') }
+					format.html { redirect_to(:controller=>'info_manager', :action=>'index' ) }
 					format.xml { render :xml => @user, :status => :created, :location => @user }
 				else
 					@user.destroy
@@ -71,8 +71,8 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		respond_to do |format|
 			if @user.update_attributes(params[:user])
-				flash[:notice] = "User #{@user.name} was successfully updated."
-				format.html { redirect_to(:action=>'index' ) }
+				flash[:notice] = "The password of user #{@user.name} was successfully updated."
+				format.html { redirect_to(:controller=>'info_manager', :action=>'index' ) }
 				format.xml { head :ok }
 			else
 				format.html { render :action => "edit" }

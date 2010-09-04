@@ -2,27 +2,24 @@
 	<%= link_to 'Logout', {:controller=>'info_manager', :action=>'logout'} %>
 </div>
 
-<h1>Editing user</h1>
+<div class="vtmena-form">
+	<% form_for(@user) do |f| %>
+		<%= f.error_messages %>
+		<fieldset>
+			<legend>Change Password of <%= @user.name %></legend>
+			<div>
+				<%= f.label :user_password, 'Password' %>:
+				<%= f.password_field :password, :size => 40 %>
+			</div>
+			<div>
+				<%= f.label :user_password_confirmation, 'Confirm' %>:
+				<%= f.password_field :password_confirmation, :size => 40 %>
+			</div>
+			<div>
+				<%= f.submit "Update" , :class => "submit" %>
+			</div>
+		</fieldset>
+	<% end %>
+</div>
 
-<% form_for(@user) do |f| %>
-	<%= f.error_messages %>
-
-	<p>
-		<%= f.label :name %><br />
-		<%= f.text_field :name %>
-	</p>
-	<p>
-		<%= f.label :user_password, 'Password' %>:<br />
-		<%= f.password_field :password %>
-	</p>
-	<p>
-		<%= f.label :user_password_confirmation, 'Confirm' %>:<br />
-		<%= f.password_field :password_confirmation %>
-	</p>
-	<p>
-		<%= f.submit 'Update' %>
-	</p>
-<% end %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Home', info_manager_path %>

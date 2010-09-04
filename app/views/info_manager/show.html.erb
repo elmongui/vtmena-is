@@ -61,14 +61,17 @@
 			<table>
 				<tr>
 					<td valign="top">
-						<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "user_mgmt", "admin") ? "block" : "none" %>'>
+						<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "user_mgmt", "view") ? "block" : "none" %>'>
 							<% form_tag do %>
 								<fieldset>
-									<legend>Manage Users</legend>
-									<div>
+									<legend>Manage Accounts</legend>
+									<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "user_mgmt", "admin") ? "block" : "none" %>'>
 										<%= link_to 'New User', new_user_path %>
 										<%= link_to "List Users", users_path %>
 										<%= link_to "Access Control Lists", access_control_lists_path %>
+									</div>
+									<div>
+										<%= link_to 'Change Password', edit_user_path(session[:user_id]) %>
 									</div>
 								</fieldset>
 							<% end %>

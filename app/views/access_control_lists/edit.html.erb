@@ -14,6 +14,7 @@
 					<th><u>Student Mgmt</u></th>
 					<th><u>Course Mgmt</u></th>
 					<th><u>Library Mgmt</u></th>
+					<th><u>Correspondence Mgmt</u></th>
 				</tr>
 				<% for acl in AccessControlList.all %>
 					<tr>
@@ -23,6 +24,7 @@
 							<td align="center"><%= f.select :student_mgmt, AccessControlList.select_options(acl.student_mgmt) %></td>
 							<td align="center"><%= f.select :course_mgmt, AccessControlList.select_options(acl.course_mgmt) %></td>
 							<td align="center"><%= f.select :library_mgmt, AccessControlList.select_options(acl.library_mgmt) %></td>
+							<td align="center"><%= f.select :correspondence_mgmt, AccessControlList.select_options(acl.correspondence_mgmt) %></td>
 							<td>
 								<%= f.submit 'Update' %>
 							</td>
@@ -32,6 +34,7 @@
 							<td align="center"><%=h acl.course_mgmt %></td>
 							<td align="center"><%=h acl.student_mgmt %></td>
 							<td align="center"><%=h acl.library_mgmt %></td>
+							<td align="center"><%=h acl.correspondence_mgmt %></td>
 						<% end %>
 					</tr>
 				<% end %>

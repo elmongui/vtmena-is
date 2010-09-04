@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100819174440) do
+ActiveRecord::Schema.define(:version => 20100902203854) do
 
   create_table "academic_credentials", :force => true do |t|
     t.integer  "applicant_id"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20100819174440) do
     t.string   "library_mgmt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "correspondence_mgmt"
   end
 
   create_table "achievements", :force => true do |t|
@@ -95,6 +96,22 @@ ActiveRecord::Schema.define(:version => 20100819174440) do
     t.integer  "day"
     t.time     "au_time_from",      :default => '2000-01-01 00:00:00'
     t.time     "au_time_to",        :default => '2000-01-01 00:00:00'
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "correspondence_topics", :force => true do |t|
+    t.string   "topic"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "correspondences", :force => true do |t|
+    t.integer  "correspondence_topic_id"
+    t.string   "in_out"
+    t.date     "date"
+    t.string   "status"
+    t.string   "details"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

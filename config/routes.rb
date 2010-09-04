@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+	map.resources :correspondences, :active_scaffold => true
+
+	map.resources :correspondence_topics, :active_scaffold => true
+
 	map.resources :class_sessions, :active_scaffold => true
 
 	map.resource :library, :controller=>:library

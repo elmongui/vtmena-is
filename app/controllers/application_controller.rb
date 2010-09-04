@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
 	helper :all # include all helpers, all the time
-	protect_from_forgery # See ActionController::RequestForgeryProtection for details
+#	protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
 	# Scrub sensitive parameters from your log
 	# filter_parameter_logging :password
@@ -62,6 +62,18 @@ private
 		
 	def require_view_for_library_mgmt
 		library_mgmt("view")
+	end	
+		
+	def correspondence_mgmt(access)
+		unless session[:user_id] && User.access?(session[:user_id], "correspondence_mgmt", access)
+			flash[:notice] = "Only authorized users may " + access.inspect + " the correspondence"
+			redirect_away({:controller=>"info_manager", :action => "show"})
+			return false
+		end
+	end	
+		
+	def require_view_for_correspondence_mgmt
+		correspondence_mgmt("view")
 	end	
 		
 end
