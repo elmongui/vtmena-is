@@ -8,6 +8,8 @@ class CorrespondencesController < ApplicationController
 		config.list.sorting = [{:correspondence_topic_id => :asc}, {:date => :asc}]
 		config.columns[:in_out].form_ui = :select
 		config.columns[:in_out].options = Correspondence.in_out_options
+		config.columns[:status].form_ui = :select
+		config.columns[:status].options = Correspondence.status_options
 		config.show.link = false
 	end
 
