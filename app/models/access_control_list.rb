@@ -6,6 +6,7 @@ class AccessControlList < ActiveRecord::Base
 		acl.student_mgmt = 'none'
 		acl.course_mgmt = 'none'
 		acl.library_mgmt = 'view'
+		acl.correspondence_mgmt = 'none'
 		acl
 	end
 
