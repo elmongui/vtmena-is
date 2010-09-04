@@ -120,6 +120,18 @@
 							<% end %>
 						</div>
 					</td>
+					<td valign="top">
+						<div class='vtmena-form' style='display:<%= User.access?(session[:user_id], "correspondence_mgmt", "view") ? "block" : "none" %>'>
+							<% form_tag do %>
+								<fieldset>
+									<legend>Correspondence</legend>
+									<div>
+										<%= link_to 'Correspondence', {:controller=>'correspondence_topics', :action=>'show'} %>
+									</div>
+								</fieldset>
+							<% end %>
+						</div>
+					</td>
 				</tr>
 			</table>
 		</td>
